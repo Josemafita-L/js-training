@@ -1,0 +1,40 @@
+*{
+    box-sizing:border-box;
+}
+
+body{
+
+    font-family:Arial, sans-serif;
+
+    background:#f4f4f4;
+
+    padding:40px;
+
+}
+
+.box{
+
+    width:300px;
+
+    height:150px;
+
+    padding:20px;
+
+    border:5px solid steelblue;
+
+    margin:40px;
+
+    background:white;
+
+}
+/*
+The CSS Box Model consists of:
+
+1. Content
+2. Padding
+3. Border
+4. Margin
+
+Padding creates space inside the border.
+Margin creates space outside the border.
+*/

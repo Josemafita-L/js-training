@@ -1,0 +1,117 @@
+/*
+The stylesheet is linked inside the head because the browser loads
+the CSS before rendering the page. This prevents an unstyled page
+from appearing first.
+*/
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+
+    font-family: sans-serif;
+
+    max-width: 800px;
+
+    margin: 0 auto;
+
+    padding: 20px;
+
+    background-color: antiquewhite;
+
+    color: #333;
+
+}
+
+/*
+The stylesheet is linked in the <head> so the browser loads the styles
+before rendering the page. This prevents the page from briefly appearing
+unstyled and provides a smoother user experience.
+*/
+
+/* Tag Selector */
+
+h2 {
+
+    color: steelblue;
+
+    border-bottom: 2px solid steelblue;
+
+    padding-bottom: 5px;
+
+}
+/* Class Selector */
+
+.highlight{
+
+    background-color:gold;
+
+    padding:5px;
+
+    border-radius:5px;
+
+}
+/*  ID Selector */
+
+#contact-section{
+
+    background-color:#eeeeee;
+
+    padding:15px;
+
+    border-radius:8px;
+
+}
+/*
+Observation:
+
+When a tag selector and a class selector target the same element,
+the class selector wins because it has higher specificity.
+
+Specificity order:
+Tag Selector < Class Selector < ID Selector
+*/
+
+/* Cascade Example 1 */
+
+p{
+    color:black;
+}
+
+p{
+    color:blue;
+}
+/* Cascade Example 2 */
+
+p{
+    color:black;
+}
+
+.intro-text{
+    color:blue;
+}
+/*
+1. When two tag selectors target the same element,
+   the last declared rule wins.
+
+2. A class selector overrides a tag selector.
+
+3. An ID selector overrides both tag and class selectors.
+
+Specificity Order:
+
+Tag Selector
+↓
+
+Class Selector
+↓
+
+ID Selector
+↓
+
+Inline Style
+
+The browser follows the CSS Cascade to determine
+which style should be applied.
+*/

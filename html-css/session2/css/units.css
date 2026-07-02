@@ -1,0 +1,54 @@
+html {
+  font-size: 16px;
+}
+
+/* Shared styles */
+div, section {
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border: 1px solid #333;
+}
+
+/* Unit boxes */
+.box-px {
+  width: 300px;
+  background: #f0f4ff;
+}
+
+.box-percent {
+  width: 50%;
+  background: #fff0f4;
+}
+
+.box-rem {
+  width: 20rem;
+  background: #f0fff4;
+}
+
+.box-vw {
+  width: 60vw;
+  background: #fffbf0;
+}
+
+/* Font demo */
+.font-demo {
+  font-size: 12px;
+}
+
+.px-text {
+  font-size: 16px;
+}
+
+.rem-text {
+  font-size: 1rem;
+}
+
+.em-text {
+  font-size: 1.5em;
+}
+
+/*
+px = fixed
+rem = relative to root (html)
+em = relative to parent
+*/

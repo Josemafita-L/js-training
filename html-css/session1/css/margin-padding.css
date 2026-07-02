@@ -1,0 +1,26 @@
+body{
+
+    background:#eeeeee;
+
+    font-family:Arial;
+
+}
+
+.box{
+
+    width:300px;
+
+    padding:30px;
+
+    margin:50px;
+
+    border:3px solid black;
+
+    background:white;
+
+}
+/*
+Padding adds space inside the border.
+
+Margin adds space outside the border.
+*/

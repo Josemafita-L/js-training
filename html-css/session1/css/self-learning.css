@@ -1,0 +1,114 @@
+body {
+
+    font-family: Arial;
+
+    padding: 30px;
+
+    background: #f5f5f5;
+
+}
+
+.display-box {
+
+    display: inline-block;
+
+    background: steelblue;
+
+    color: white;
+
+    padding: 15px;
+
+}
+
+.overflow-box {
+
+    width: 250px;
+
+    height: 100px;
+
+    overflow: auto;
+
+    border: 2px solid black;
+
+    padding: 10px;
+
+    background: white;
+
+}
+
+.outline-btn {
+
+    padding: 12px 20px;
+
+    outline: 3px solid red;
+
+}
+
+.hidden-text {
+
+    visibility: hidden;
+
+}
+
+.max-width-box {
+
+    max-width: 500px;
+
+    background: white;
+
+    padding: 20px;
+
+    border: 2px solid steelblue;
+
+}
+
+/*
+display:block
+Starts on a new line.
+
+display:inline
+Stays in the same line.
+
+display:inline-block
+Allows width and height while staying inline.
+
+display:none
+Removes the element from the page layout.
+*/
+
+/*
+hidden
+Cuts off extra content.
+
+scroll
+Always shows scrollbars.
+
+auto
+Shows scrollbars only when needed.
+
+visible
+Allows content to overflow.
+*/
+
+/*
+Outline is drawn outside the border.
+
+Unlike border,
+outline does not affect the element's dimensions.
+*/
+
+/*
+visibility:hidden
+Hides the element
+but keeps its space.
+
+visibility:visible
+Displays the element.
+*/
+
+/*
+max-width limits
+the maximum width of an element.
+
+It helps create responsive layouts.
+*/

@@ -1,0 +1,76 @@
+/* BASIC FLEX CONTAINER */
+.container {
+    display: flex;
+    gap: 1rem;
+    padding: 1rem;
+    background: #eee;
+}
+
+.item {
+    background: #4f46e5;
+    color: white;
+    padding: 1rem 2rem;
+    border-radius: 4px;
+}
+
+/* FLEX GROW */
+.grow-container {
+    display: flex;
+    gap: 1rem;
+    padding: 1rem;
+    background: #ddd;
+}
+
+.grow-1 {
+    flex-grow: 1;
+    background: #818cf8;
+    padding: 1rem;
+}
+
+.grow-2 {
+    flex-grow: 2;
+    background: #4f46e5;
+    color: white;
+    padding: 1rem;
+}
+
+/* NAVBAR */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #111827;
+    padding: 1rem;
+    margin-top: 1rem;
+}
+
+.logo {
+    color: white;
+    font-weight: bold;
+}
+
+.nav-links {
+    display: flex;
+    gap: 1rem;
+    list-style: none;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+}
+
+/* CARDS */
+.card-row {
+    display: flex;
+    gap: 1.5rem;
+    padding: 1rem;
+    margin-top: 1rem;
+}
+
+.card {
+    flex: 1;
+    border: 1px solid #ccc;
+    padding: 1rem;
+    border-radius: 8px;
+}

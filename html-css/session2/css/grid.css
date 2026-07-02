@@ -1,0 +1,76 @@
+/* BASIC GRID */
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    padding: 1rem;
+}
+
+.grid-item {
+    background: #e5e7eb;
+    padding: 1rem;
+    text-align: center;
+}
+
+/* FEATURED */
+.grid-container-featured {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    padding: 1rem;
+}
+
+.featured {
+    grid-column: 1 / 3;
+    background: #4f46e5;
+    color: white;
+    padding: 2rem;
+}
+
+/* PAGE LAYOUT */
+.page-layout {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    grid-template-rows: auto 1fr auto;
+    min-height: 100vh;
+}
+
+.page-header {
+    grid-column: 1 / -1;
+    background: #111827;
+    color: white;
+    padding: 1rem;
+}
+
+.page-sidebar {
+    background: #e5e7eb;
+    padding: 1rem;
+}
+
+.page-main {
+    background: #f3f4f6;
+    padding: 1rem;
+}
+
+.page-footer {
+    grid-column: 1 / -1;
+    background: #111827;
+    color: white;
+    padding: 1rem;
+}
+
+/* PHOTO GRID */
+.photo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+    padding: 1rem;
+}
+
+.photo-card {
+    background: #c7d2fe;
+    height: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
