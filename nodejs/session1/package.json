@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node dates.js",
     "hello": "node hello.js",
-    "info": "node system-info.js"
+    "info": "node system-info.js",
+    "dev": "nodemon dates.js"
   },
   "keywords": [],
   "author": "Josemafita",
@@ -14,5 +15,8 @@
   "type": "commonjs",
   "dependencies": {
     "dayjs": "^1.11.21"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
   }
 }

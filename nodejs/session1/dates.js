@@ -3,7 +3,7 @@
 // the node_modules folder to find installed packages.
 const dayjs = require("dayjs");
 
-console.log("Today:", dayjs().format("DD MMM YYYY"));
+console.log("Today:", dayjs().format("DD/MMM/YYYY"));
 
 console.log("Day of week:", dayjs().format("dddd"));
 
