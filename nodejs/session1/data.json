@@ -1,0 +1,19 @@
+{
+    "users": [
+        {
+            "id": 1,
+            "name": "Jose",
+            "role": "intern"
+        },
+        {
+            "id": 2,
+            "name": "Kayal",
+            "role": "intern"
+        },
+        {
+            "id": 3,
+            "name": "Monica",
+            "role": "intern"
+        }
+    ]
+}
