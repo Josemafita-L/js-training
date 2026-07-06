@@ -4,13 +4,40 @@ const server = http.createServer((req, res) => {
 
     console.log(`${req.method} ${req.url}`);
 
+    // if (req.url === '/') {
+
+    //     res.writeHead(200, {
+    //         'Content-Type': 'text/plain'
+    //     });
+
+    //     res.end('Home page');
+
+    // } 
     if (req.url === '/') {
 
         res.writeHead(200, {
-            'Content-Type': 'text/plain'
+            'Content-Type': 'text/html'
         });
 
-        res.end('Home page');
+        res.end(`
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <title>Home</title>
+        </head>
+        <body>
+            <h1>Welcome to My Node.js Server</h1>
+            <p>This page is served using Content-Type: text/html.</p>
+        </body>
+        </html>
+    `);
+/*
+    Content-Type tells the browser what type of data is being sent.
+    
+    text/plain       -> Plain text
+    text/html        -> HTML page
+    application/json -> JSON data
+ */
 
     } else if (req.url === '/about') {
 
