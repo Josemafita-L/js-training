@@ -1,10 +1,10 @@
-import TsxRules from './TsxRules'
+import StyledCard from './StyledCard'
 
 function App() {
   return (
     <>
-      <h1>TSX Rules</h1>
-      <TsxRules />
+      <h1>Styled Card</h1>
+      <StyledCard />
     </>
   )
 }
