@@ -1,16 +1,15 @@
-import StatusBadge from './StatusBadge'
+import InternCard from './InternCard'
 
 function App() {
   return (
     <>
-      <h1>Status Badge</h1>
-      <StatusBadge />
+      <h1>Intern Card</h1>
+      <InternCard />
     </>
   )
 }
 
 export default App
 
-// Using messages.length directly can render 0 when the array is empty.
-// Checking messages.length > 0 returns true or false,
-// preventing React from displaying 0.
+// Use && when you only need to render something if a condition is true.
+// Use a ternary when you need to choose between two different values or UI elements.
