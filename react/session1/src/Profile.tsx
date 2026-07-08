@@ -4,12 +4,21 @@ function Profile() {
     const score: number = 92
     const joinDate: string = '2026-06-30'
 
-    // TSX expressions use {} to evaluate JavaScript values.
-    // Only expressions are allowed inside {}.
-    // Statements like if, for, and while cannot be written directly in TSX.
+    const avatarUrl: string = 'https://i.pravatar.cc/100'
+    const altText: string = `Avatar of ${name}`
+
+    // TSX expressions inside {} return a value and can be rendered.
+    // Statements like if, for, and while do not return values,
+    // so they cannot be written directly inside TSX.
+
+    // width={100} passes a number to the width prop.
+    // width="100" passes a string. Use {} when passing numbers,
+    // variables, booleans, or JavaScript expressions.
 
     return (
         <div>
+            <img src={avatarUrl} alt={altText} width={100} />
+
             <h2>{name}</h2>
 
             <p>Role: {role}</p>
