@@ -1,15 +1,11 @@
-import InternCard from './InternCard'
+import Dashboard from './Dashboard'
 
 function App() {
   return (
     <>
-      <h1>Intern Card</h1>
-      <InternCard />
+      <Dashboard />
     </>
   )
 }
 
 export default App
-
-// Use && when you only need to render something if a condition is true.
-// Use a ternary when you need to choose between two different values or UI elements.
