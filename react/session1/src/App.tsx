@@ -1,16 +1,15 @@
-import Profile from './Profile'
+import SkillList from './SkillList'
 
 function App() {
   return (
     <>
-      <h1>Profile</h1>
-      <Profile />
+      <h1>React Skills</h1>
+      <SkillList />
     </>
   )
 }
 
 export default App
-
-// TSX expressions inside {} return a value and can be rendered.
-// Statements like if, for, and while perform actions but do not return values,
-// so they cannot be written directly inside TSX.
+// React requires a unique key for each list item.
+// Keys help React identify which items have changed, been added, or removed.
+// Without keys, React shows a warning because it cannot efficiently update the list.
