@@ -1,8 +1,20 @@
 import "./App.css"
+
 import InternCard from "./InternCard"
 import ProfileCard from "./ProfileCard"
+import InternProfile from "./InternProfile"
+import type { Intern } from "./InternProfile"
 
 function App() {
+
+  const rahul: Intern = {
+    id: 1,
+    name: "Rahul",
+    score: 92,
+    isPresent: true,
+    skills: ["HTML", "CSS", "TypeScript", "React"],
+  }
+
   return (
     <div>
 
@@ -30,19 +42,25 @@ function App() {
 
       <h1>Default Props</h1>
 
-<ProfileCard
-  name="Rahul"
-  role="Frontend Developer"
-  score={92}
-  skills={["HTML", "CSS", "React", "TypeScript"]}
-/>
+      <ProfileCard
+        name="Rahul"
+        role="Frontend"
+        score={92}
+        skills={["HTML", "CSS", "React"]}
+      />
 
-<ProfileCard
-  name="Priya"
-  skills={["Node.js", "Express"]}
-/>
+      <ProfileCard
+        name="Priya"
+        skills={["Node.js", "Express"]}
+      />
 
-<ProfileCard />
+      <ProfileCard />
+
+      <hr />
+
+      <h1>Object as Props</h1>
+
+      <InternProfile intern={rahul} />
 
     </div>
   )
