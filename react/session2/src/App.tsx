@@ -21,22 +21,25 @@ function App() {
       <h1>Typed Props</h1>
 
       <InternCard
-        name="Rahul"
-        score={92}
-        isPresent={true}
-      />
+  name="Rahul"
+  score={92}
+  isPresent={true}
+  role="Frontend"
+/>
 
       <InternCard
-        name="Priya"
-        score={78}
-        isPresent={true}
-      />
+  name="Priya"
+  score={78}
+  isPresent={true}
+  role="Backend"
+/>
 
       <InternCard
-        name="Amit"
-        score={45}
-        isPresent={false}
-      />
+  name="Amit"
+  score={45}
+  isPresent={false}
+  role="Full Stack"
+/>
 
       <hr />
 

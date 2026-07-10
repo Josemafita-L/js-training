@@ -1,40 +1,56 @@
+import Avatar from "./Avatar"
+import Badge from "./Badge"
+import ScoreBar from "./ScoreBar"
+
 interface InternCardProps {
   name: string
   score: number
   isPresent: boolean
+  role: string
 }
 
-// Props should never be modified because they are read-only.
-// Changing props directly breaks React's one-way data flow and can
-// lead to inconsistent UI updates.
+// Badge is reused multiple times with different data.
+// This avoids duplicate code, keeps styling consistent,
+// and makes future changes easier.
 function InternCard({
   name,
   score,
   isPresent,
+  role,
 }: InternCardProps) {
-
-  // ❌ Wrong
-  // score = score + 10
-
-  // ✅ Correct
-  const adjustedScore: number =
-    score >= 90 ? score : score + 5
-
   return (
     <div className="card">
+      <Avatar name={name} />
+
       <h2>{name}</h2>
 
-      <p>
-        Original Score : {score}
-      </p>
+      <ScoreBar score={score} />
 
-      <p>
-        Adjusted Score : {adjustedScore}
-      </p>
+      <div
+        style={{
+          display: "flex",
+          gap: "6px",
+          marginTop: "10px",
+          flexWrap: "wrap",
+        }}
+      >
+        <Badge
+          label={role}
+          color="#4f46e5"
+        />
 
-      <p>
-        {isPresent ? "Present" : "Absent"}
-      </p>
+        <Badge
+          label={isPresent ? "Present" : "Absent"}
+          color={isPresent ? "green" : "#e53e3e"}
+        />
+
+        {score >= 90 && (
+          <Badge
+            label="Top Performer"
+            color="#d97706"
+          />
+        )}
+      </div>
     </div>
   )
 }
