@@ -24,3 +24,24 @@ h1 {
 .card p {
   margin: 8px 0;
 }
+.card-title {
+  color: #2563eb;
+  margin-bottom: 10px;
+}
+
+.card-body {
+  margin-top: 10px;
+}
+
+button {
+  background: #2563eb;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #1d4ed8;
+}

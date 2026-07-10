@@ -1,5 +1,5 @@
 import "./App.css"
-
+import Card from "./Card"
 import InternCard from "./InternCard"
 import ProfileCard from "./ProfileCard"
 import InternProfile from "./InternProfile"
@@ -61,6 +61,25 @@ function App() {
       <h1>Object as Props</h1>
 
       <InternProfile intern={rahul} />
+      <hr />
+
+<h1>Children Prop</h1>
+
+<Card title="Rahul">
+  <p>Score : 92</p>
+
+  <p>Status : Present</p>
+
+  <button>View Profile</button>
+</Card>
+
+<Card title="Announcements">
+  <ul>
+    <li>Session 3 tomorrow at 10 AM</li>
+    <li>Submit React assignment before Friday</li>
+  </ul>
+</Card>
+<Card title="Empty Card" />
 
     </div>
   )
