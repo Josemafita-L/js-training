@@ -1,10 +1,12 @@
-import './App.css'
-import InternCard from './InternCard'
+import "./App.css"
+import InternCard from "./InternCard"
+import ProfileCard from "./ProfileCard"
 
 function App() {
   return (
     <div>
-      <h1>Intern Details</h1>
+
+      <h1>Typed Props</h1>
 
       <InternCard
         name="Rahul"
@@ -23,16 +25,27 @@ function App() {
         score={45}
         isPresent={false}
       />
+
+      <hr />
+
+      <h1>Default Props</h1>
+
+<ProfileCard
+  name="Rahul"
+  role="Frontend Developer"
+  score={92}
+  skills={["HTML", "CSS", "React", "TypeScript"]}
+/>
+
+<ProfileCard
+  name="Priya"
+  skills={["Node.js", "Express"]}
+/>
+
+<ProfileCard />
+
     </div>
   )
 }
 
 export default App
-// TypeScript reports an error because score expects a number,
-// not a string. Catching this during development prevents runtime bugs.
-// TypeScript prevents passing a string where a boolean is required,
-// helping ensure the component receives the correct data type.
-// Required props cannot be omitted. TypeScript ensures all required
-// data is provided before the component is rendered.
-// TypeScript rejects unknown props, preventing accidental or
-// unsupported data from being passed to the component.
