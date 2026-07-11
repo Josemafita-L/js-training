@@ -4,6 +4,7 @@ import InternCard from "./InternCard"
 import ProfileCard from "./ProfileCard"
 import InternProfile from "./InternProfile"
 import type { Intern } from "./InternProfile"
+import Dashboard from "./Dashboard"
 
 function App() {
 
@@ -75,6 +76,11 @@ function App() {
 
   <button>View Profile</button>
 </Card>
+<hr />
+
+<h1>Dashboard</h1>
+
+<Dashboard />
 
 <Card title="Announcements">
   <ul>
