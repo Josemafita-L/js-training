@@ -4,6 +4,7 @@ import StateTypes from './StateTypes'
 import InternForm from "./InternForm"
 import TogglePanel from "./TogglePanel"
 import InternObjectForm from "./InternObjectForm"
+import InternList from "./InternList"
 function App() {
   return (
     <>
@@ -20,6 +21,7 @@ function App() {
       <InternForm />
       <TogglePanel />
       <InternObjectForm />
+      <InternList />
     </>
   )
 }
