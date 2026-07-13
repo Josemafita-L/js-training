@@ -5,6 +5,8 @@ import InternForm from "./InternForm"
 import TogglePanel from "./TogglePanel"
 import InternObjectForm from "./InternObjectForm"
 import InternList from "./InternList"
+import InternLoader from "./InternLoader"
+import FilteredInterns from "./FilteredInterns"
 function App() {
   return (
     <>
@@ -22,6 +24,8 @@ function App() {
       <TogglePanel />
       <InternObjectForm />
       <InternList />
+      <InternLoader />
+      <FilteredInterns />
     </>
   )
 }
