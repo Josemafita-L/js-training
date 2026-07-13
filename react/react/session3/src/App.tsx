@@ -8,6 +8,10 @@ import InternList from "./InternList"
 import InternLoader from "./InternLoader"
 import FilteredInterns from "./FilteredInterns"
 import EscapeHandler from "./EscapeHandler"
+import FocusInput from "./FocusInput"
+import RefVsState from "./RefVsState"
+import StopwatchRef from "./StopwatchRef"
+
 function App() {
   return (
     <>
@@ -28,6 +32,15 @@ function App() {
       <InternLoader />
       <FilteredInterns />
       <EscapeHandler />
+      <FocusInput />
+      <FocusInput />
+      <hr />
+
+      <RefVsState />
+      <RefVsState />
+      <hr />
+
+      <StopwatchRef />
     </>
   )
 }
