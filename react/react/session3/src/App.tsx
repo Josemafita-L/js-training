@@ -1,6 +1,8 @@
 import './App.css'
 import Counter from './Counter'
 import StateTypes from './StateTypes'
+import InternForm from "./InternForm"
+
 
 function App() {
   return (
@@ -12,8 +14,13 @@ function App() {
       <hr />
 
       <StateTypes />
+
+      <hr />
+
+      <InternForm />
     </>
   )
 }
+
 
 export default App
