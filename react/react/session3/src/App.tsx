@@ -7,6 +7,7 @@ import InternObjectForm from "./InternObjectForm"
 import InternList from "./InternList"
 import InternLoader from "./InternLoader"
 import FilteredInterns from "./FilteredInterns"
+import EscapeHandler from "./EscapeHandler"
 function App() {
   return (
     <>
@@ -26,6 +27,7 @@ function App() {
       <InternList />
       <InternLoader />
       <FilteredInterns />
+      <EscapeHandler />
     </>
   )
 }

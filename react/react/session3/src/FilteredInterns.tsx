@@ -20,7 +20,7 @@ function FilteredInterns() {
   const [isLoading, setIsLoading] = useState<boolean>(false)
 
   useEffect(() => {
-    setIsLoading(true)
+   // setIsLoading(true)
 
     const timer = setTimeout(() => {
       const result =
