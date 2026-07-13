@@ -11,6 +11,7 @@ import EscapeHandler from "./EscapeHandler"
 import FocusInput from "./FocusInput"
 import RefVsState from "./RefVsState"
 import StopwatchRef from "./StopwatchRef"
+import Dashboard from "./Dashboard"
 
 function App() {
   return (
@@ -41,6 +42,8 @@ function App() {
       <hr />
 
       <StopwatchRef />
+      <hr />
+      <Dashboard />
     </>
   )
 }
