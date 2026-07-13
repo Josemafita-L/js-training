@@ -2,7 +2,7 @@ import './App.css'
 import Counter from './Counter'
 import StateTypes from './StateTypes'
 import InternForm from "./InternForm"
-
+import TogglePanel from "./TogglePanel"
 
 function App() {
   return (
@@ -18,6 +18,7 @@ function App() {
       <hr />
 
       <InternForm />
+      <TogglePanel />
     </>
   )
 }
