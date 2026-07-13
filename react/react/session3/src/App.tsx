@@ -3,7 +3,7 @@ import Counter from './Counter'
 import StateTypes from './StateTypes'
 import InternForm from "./InternForm"
 import TogglePanel from "./TogglePanel"
-
+import InternObjectForm from "./InternObjectForm"
 function App() {
   return (
     <>
@@ -19,6 +19,7 @@ function App() {
 
       <InternForm />
       <TogglePanel />
+      <InternObjectForm />
     </>
   )
 }
