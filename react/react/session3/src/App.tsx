@@ -12,6 +12,7 @@ import FocusInput from "./FocusInput"
 import RefVsState from "./RefVsState"
 import StopwatchRef from "./StopwatchRef"
 import Dashboard from "./Dashboard"
+import SelfLearning from "./SelfLearning"
 
 function App() {
   return (
@@ -44,6 +45,8 @@ function App() {
       <StopwatchRef />
       <hr />
       <Dashboard />
+      <hr />
+      <SelfLearning />
     </>
   )
 }
