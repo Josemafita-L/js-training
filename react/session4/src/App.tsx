@@ -2,6 +2,7 @@ import Navbar from "./components/Navbar"
 import ThemedCard from "./components/ThemedCard"
 import CounterDemo from "./components/CounterDemo"
 import AddInternForm from "./components/AddInternForm"
+import InternSearch from "./components/InternSearch"
 
 import { useInterns } from "./contexts/intern-context"
 
@@ -9,16 +10,18 @@ function App() {
   const { interns, isLoading } = useInterns()
 
   /*
-  Theme and intern data are kept in separate contexts because
-  they represent different responsibilities.
+  ThemeContext:
+  Responsible for UI appearance like Light and Dark mode.
 
-  ThemeContext manages UI appearance.
+  InternContext:
+  Responsible for managing intern data.
 
-  InternContext manages application data.
+  Components:
+  Responsible only for displaying UI.
 
-  Keeping them separate makes the application
-  easier to maintain and avoids unnecessary
-  re-renders.
+  Custom Hooks:
+  Responsible for reusable business logic like
+  searching, forms and counters.
   */
 
   if (isLoading) {
@@ -45,6 +48,8 @@ function App() {
         <CounterDemo />
 
         <AddInternForm />
+
+        <InternSearch />
       </div>
     </div>
   )
