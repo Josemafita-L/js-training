@@ -1,26 +1,30 @@
 import Navbar from "./components/Navbar"
 import ScoreStats from "./components/ScoreStats"
-import AddInternForm from "./components/AddInternForm"
 import CounterDemo from "./components/CounterDemo"
+import AddInternForm from "./components/AddInternForm"
 import InternSearch from "./components/InternSearch"
-import ThemedCard from "./components/ThemedCard"
+import InternListWithCallback from "./components/InternListWithCallback"
 
 import { useInterns } from "./contexts/intern-context"
 
 function App() {
-  const { interns, isLoading } = useInterns()
+  const { isLoading } = useInterns()
 
   /*
   Application Layers
 
-  Contexts:
-  Store shared application state.
+  Contexts
+  ----------
+  Store global shared state like theme and intern data.
 
-  Custom Hooks:
-  Store reusable business logic.
+  Custom Hooks
+  -------------
+  Store reusable business logic such as counters,
+  form handling and searching.
 
-  Components:
-  Display UI using contexts and hooks.
+  Components
+  ----------
+  Responsible only for rendering the UI.
   */
 
   if (isLoading) {
@@ -31,26 +35,16 @@ function App() {
     <div>
       <Navbar />
 
-      <div
-        style={{
-          padding: "16px",
-        }}
-      >
+      <div style={{ padding: "16px" }}>
         <ScoreStats />
-
-        {interns.map((intern) => (
-          <ThemedCard
-            key={intern.id}
-            name={intern.name}
-            score={intern.score}
-          />
-        ))}
-
-        <CounterDemo />
 
         <AddInternForm />
 
+        <CounterDemo />
+
         <InternSearch />
+
+        <InternListWithCallback />
       </div>
     </div>
   )
