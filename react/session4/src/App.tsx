@@ -1,6 +1,7 @@
 import Navbar from "./components/Navbar"
 import ThemedCard from "./components/ThemedCard"
 import CounterDemo from "./components/CounterDemo"
+import AddInternForm from "./components/AddInternForm"
 
 import { useInterns } from "./contexts/intern-context"
 
@@ -11,12 +12,13 @@ function App() {
   Theme and intern data are kept in separate contexts because
   they represent different responsibilities.
 
-  ThemeContext manages only UI-related state (light/dark mode).
+  ThemeContext manages UI appearance.
 
-  InternContext manages application data (intern list, loading state, add/remove operations).
+  InternContext manages application data.
 
-  Keeping them separate improves maintainability, keeps concerns isolated,
-  and avoids unnecessary re-renders when unrelated state changes.
+  Keeping them separate makes the application
+  easier to maintain and avoids unnecessary
+  re-renders.
   */
 
   if (isLoading) {
@@ -41,6 +43,8 @@ function App() {
         ))}
 
         <CounterDemo />
+
+        <AddInternForm />
       </div>
     </div>
   )
