@@ -3,7 +3,7 @@ import ScoreStats from "./components/ScoreStats"
 import AddInternForm from "./components/AddInternForm"
 import InternSearch from "./components/InternSearch"
 import InternListWithCallback from "./components/InternListWithCallback"
-
+import SelfLearning from "./SelfLearning"
 import { useInterns } from "./contexts/intern-context"
 
 function App() {
@@ -57,6 +57,7 @@ function App() {
         <InternSearch />
 
         <InternListWithCallback />
+        <SelfLearning />
       </div>
     </div>
   )
