@@ -1,6 +1,5 @@
 import Navbar from "./components/Navbar"
 import ScoreStats from "./components/ScoreStats"
-import CounterDemo from "./components/CounterDemo"
 import AddInternForm from "./components/AddInternForm"
 import InternSearch from "./components/InternSearch"
 import InternListWithCallback from "./components/InternListWithCallback"
@@ -11,36 +10,49 @@ function App() {
   const { isLoading } = useInterns()
 
   /*
-  Application Layers
+  Application Architecture
 
   Contexts
-  ----------
-  Store global shared state like theme and intern data.
+  --------
+  Store shared application state that is needed by multiple
+  components, such as theme and intern data.
 
   Custom Hooks
-  -------------
-  Store reusable business logic such as counters,
-  form handling and searching.
+  ------------
+  Encapsulate reusable business logic like form handling,
+  searching and counters while keeping components clean.
 
   Components
   ----------
-  Responsible only for rendering the UI.
+  Responsible only for rendering the UI and interacting
+  with contexts or custom hooks.
   */
 
   if (isLoading) {
-    return <h2>Loading...</h2>
+    return (
+      <div
+        style={{
+          padding: "30px",
+          fontSize: "22px",
+        }}
+      >
+        Loading Intern Data...
+      </div>
+    )
   }
 
   return (
     <div>
       <Navbar />
 
-      <div style={{ padding: "16px" }}>
+      <div
+        style={{
+          padding: "16px",
+        }}
+      >
         <ScoreStats />
 
         <AddInternForm />
-
-        <CounterDemo />
 
         <InternSearch />
 
