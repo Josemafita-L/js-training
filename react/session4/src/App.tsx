@@ -1,23 +1,22 @@
 import Navbar from "./components/Navbar"
 import ThemedCard from "./components/ThemedCard"
+import CounterDemo from "./components/CounterDemo"
 
 import { useInterns } from "./contexts/intern-context"
 
 function App() {
-  const { interns, isLoading } =
-    useInterns()
+  const { interns, isLoading } = useInterns()
 
   /*
-  Theme and intern data are kept in separate contexts
-  because they represent different responsibilities.
+  Theme and intern data are kept in separate contexts because
+  they represent different responsibilities.
 
-  Theme context manages only UI appearance,
-  while Intern context manages application data.
+  ThemeContext manages only UI-related state (light/dark mode).
 
-  Separating them improves maintainability,
-  keeps components focused,
-  and prevents unnecessary re-renders when
-  only one type of state changes.
+  InternContext manages application data (intern list, loading state, add/remove operations).
+
+  Keeping them separate improves maintainability, keeps concerns isolated,
+  and avoids unnecessary re-renders when unrelated state changes.
   */
 
   if (isLoading) {
@@ -40,6 +39,8 @@ function App() {
             score={intern.score}
           />
         ))}
+
+        <CounterDemo />
       </div>
     </div>
   )
