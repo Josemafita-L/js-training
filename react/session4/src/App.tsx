@@ -1,8 +1,9 @@
 import Navbar from "./components/Navbar"
-import ThemedCard from "./components/ThemedCard"
-import CounterDemo from "./components/CounterDemo"
+import ScoreStats from "./components/ScoreStats"
 import AddInternForm from "./components/AddInternForm"
+import CounterDemo from "./components/CounterDemo"
 import InternSearch from "./components/InternSearch"
+import ThemedCard from "./components/ThemedCard"
 
 import { useInterns } from "./contexts/intern-context"
 
@@ -10,18 +11,16 @@ function App() {
   const { interns, isLoading } = useInterns()
 
   /*
-  ThemeContext:
-  Responsible for UI appearance like Light and Dark mode.
+  Application Layers
 
-  InternContext:
-  Responsible for managing intern data.
-
-  Components:
-  Responsible only for displaying UI.
+  Contexts:
+  Store shared application state.
 
   Custom Hooks:
-  Responsible for reusable business logic like
-  searching, forms and counters.
+  Store reusable business logic.
+
+  Components:
+  Display UI using contexts and hooks.
   */
 
   if (isLoading) {
@@ -37,6 +36,8 @@ function App() {
           padding: "16px",
         }}
       >
+        <ScoreStats />
+
         {interns.map((intern) => (
           <ThemedCard
             key={intern.id}
