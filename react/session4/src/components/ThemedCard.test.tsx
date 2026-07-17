@@ -119,3 +119,38 @@ test("renders score 100 correctly", () => {
     screen.getByText("Pass")
   ).toBeInTheDocument()
 })
+test("no console errors during ThemedCard render", () => {
+
+  /*
+  vi.spyOn() observes an existing function without replacing
+  its actual behaviour permanently.
+
+  vi.fn() creates a completely new mock function.
+
+  vi.mock() replaces an entire module with a fake implementation.
+
+  vi.spyOn() is useful when we only want to check whether
+  something happened, like console.error being called.
+  */
+
+
+  const spy = vi
+    .spyOn(console, "error")
+    .mockImplementation(() => {})
+
+
+  render(
+    <ThemedCard
+      name="Rahul"
+      score={92}
+    />
+  )
+
+
+  expect(spy)
+    .not
+    .toHaveBeenCalled()
+
+
+  spy.mockRestore()
+})
