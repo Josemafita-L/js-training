@@ -1,4 +1,5 @@
 /* eslint-disable react-refresh/only-export-components */
+
 import type { ReactNode, ReactElement } from "react"
 
 import {
@@ -7,6 +8,7 @@ import {
 } from "@testing-library/react"
 
 import { ThemeProvider } from "../contexts/theme-context"
+import { InternProvider } from "../contexts/intern-context"
 
 function AllProviders({
   children,
@@ -15,14 +17,16 @@ function AllProviders({
 }) {
   return (
     <ThemeProvider>
-      {children}
+      <InternProvider>
+        {children}
+      </InternProvider>
     </ThemeProvider>
   )
 }
 
 function customRender(
   ui: ReactElement,
-  options?: RenderOptions
+  options?: Omit<RenderOptions, "wrapper">
 ) {
   return render(ui, {
     wrapper: AllProviders,
