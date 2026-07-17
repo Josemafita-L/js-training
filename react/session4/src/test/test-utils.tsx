@@ -1,8 +1,18 @@
-import { ReactNode } from 'react'
-import { render, RenderOptions } from '@testing-library/react'
-import { ThemeProvider } from '../contexts/theme-context'
+/* eslint-disable react-refresh/only-export-components */
+import type { ReactNode, ReactElement } from "react"
 
-function AllProviders({ children }: { children: ReactNode }) {
+import {
+  render,
+  type RenderOptions,
+} from "@testing-library/react"
+
+import { ThemeProvider } from "../contexts/theme-context"
+
+function AllProviders({
+  children,
+}: {
+  children: ReactNode
+}) {
   return (
     <ThemeProvider>
       {children}
@@ -10,9 +20,15 @@ function AllProviders({ children }: { children: ReactNode }) {
   )
 }
 
-function customRender(ui: React.ReactElement, options?: RenderOptions) {
-  return render(ui, { wrapper: AllProviders, ...options })
+function customRender(
+  ui: ReactElement,
+  options?: RenderOptions
+) {
+  return render(ui, {
+    wrapper: AllProviders,
+    ...options,
+  })
 }
 
-export * from '@testing-library/react'
+export * from "@testing-library/react"
 export { customRender as render }
