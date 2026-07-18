@@ -1,153 +1,243 @@
-import { render, screen } from "../test/test-utils"
+import { render, screen, waitFor } from "../test/test-utils"
 import userEvent from "@testing-library/user-event"
+import { vi } from "vitest"
+
 import AddInternForm from "./AddInternForm"
 
-describe("AddInternForm", () => {
-  /*
-    userEvent simulates real browser interactions such as typing,
-    clicking, selecting options, etc.
 
-    It is preferred over fireEvent because it more closely
-    resembles how a real user interacts with the application.
+describe("AddInternForm", () => {
+
+
+  /*
+  describe groups related tests together.
+
+  Nested describe blocks make test failures easier
+  to understand.
+
+  Example:
+  AddInternForm > validation > name required
+
+  But too much nesting makes tests difficult to read.
+  Two levels deep is usually enough.
   */
 
-  test("renders Add Intern heading", () => {
-    render(<AddInternForm />)
 
-    expect(
-      screen.getByRole("heading", {
-        name: "Add Intern",
+  describe("initial state", () => {
+
+
+    test("name input is empty", () => {
+
+      render(<AddInternForm />)
+
+
+      expect(
+        screen.getByPlaceholderText("Intern Name")
+      )
+      .toHaveValue("")
+    })
+
+
+    test("score input starts at 0", () => {
+
+      render(<AddInternForm />)
+
+
+      expect(
+        screen.getByPlaceholderText("Score")
+      )
+      .toHaveValue(0)
+    })
+
+
+    test("role defaults to Frontend", () => {
+
+      render(<AddInternForm />)
+
+
+      expect(
+        screen.getByRole("combobox")
+      )
+      .toHaveValue("Frontend")
+    })
+
+  })
+
+
+
+  describe("validation", () => {
+
+
+    test("shows error when name is empty on submit", async () => {
+
+      const user = userEvent.setup()
+
+
+      render(<AddInternForm />)
+
+
+      await user.click(
+        screen.getByRole("button", {
+          name:"Add Intern"
+        })
+      )
+
+
+      expect(
+        screen.getByText("Name is required")
+      )
+      .toBeInTheDocument()
+
+    })
+
+
+
+    test("shows error when score is above 100", async()=>{
+
+      const user=userEvent.setup()
+
+
+      render(<AddInternForm />)
+
+
+
+      await user.type(
+        screen.getByPlaceholderText("Intern Name"),
+        "Rahul"
+      )
+
+
+      await user.clear(
+        screen.getByPlaceholderText("Score")
+      )
+
+
+      await user.type(
+        screen.getByPlaceholderText("Score"),
+        "150"
+      )
+
+
+      await user.click(
+        screen.getByRole("button",{
+          name:"Add Intern"
+        })
+      )
+
+
+
+      expect(
+        screen.getByText(
+          "Score must be between 0 and 100"
+        )
+      )
+      .toBeInTheDocument()
+
+    })
+
+
+
+    test("clears error after valid input", async()=>{
+
+      const user=userEvent.setup()
+
+
+      render(<AddInternForm />)
+
+
+      await user.click(
+        screen.getByRole("button",{
+          name:"Add Intern"
+        })
+      )
+
+
+      expect(
+        screen.getByText("Name is required")
+      )
+      .toBeInTheDocument()
+
+
+
+      await user.type(
+        screen.getByPlaceholderText("Intern Name"),
+        "Rahul"
+      )
+
+
+
+      await waitFor(()=>{
+
+        expect(
+          screen.queryByText(
+            "Name is required"
+          )
+        )
+        .not
+        .toBeInTheDocument()
+
       })
-    ).toBeInTheDocument()
+
+    })
+
+
   })
 
-  test("updates intern name when user types", async () => {
-    const user = userEvent.setup()
 
-    render(<AddInternForm />)
 
-    const nameInput =
-      screen.getByPlaceholderText("Intern Name")
+  describe("successful submit",()=>{
 
-    await user.type(nameInput, "Rahul")
 
-    expect(nameInput).toHaveValue("Rahul")
-  })
+    test("clears form after adding intern",async()=>{
 
-  test("updates score when user types", async () => {
-    const user = userEvent.setup()
 
-    render(<AddInternForm />)
+      const user=userEvent.setup()
 
-    const scoreInput =
-      screen.getByPlaceholderText("Score")
 
-    await user.clear(scoreInput)
 
-    await user.type(scoreInput, "92")
+      render(<AddInternForm />)
 
-    expect(scoreInput).toHaveValue(92)
-  })
 
- test("checks Present checkbox", async () => {
-  const user = userEvent.setup()
 
-  render(<AddInternForm />)
+      await user.type(
+        screen.getByPlaceholderText("Intern Name"),
+        "Rahul"
+      )
 
-  const checkbox =
-    screen.getByRole("checkbox")
 
-  expect(checkbox).toBeChecked()
 
-  await user.click(checkbox)
+      await user.clear(
+        screen.getByPlaceholderText("Score")
+      )
 
-  expect(checkbox).not.toBeChecked()
-})
 
-  test("changes intern role", async () => {
-    const user = userEvent.setup()
+      await user.type(
+        screen.getByPlaceholderText("Score"),
+        "90"
+      )
 
-    render(<AddInternForm />)
 
-    const role =
-      screen.getByRole("combobox")
 
-    expect(role).toHaveValue("Frontend")
+      await user.click(
+        screen.getByRole("button",{
+          name:"Add Intern"
+        })
+      )
 
-    await user.selectOptions(role, "Backend")
 
-    expect(role).toHaveValue("Backend")
-  })
 
-  test("reset button clears the form", async () => {
-    const user = userEvent.setup()
+      await waitFor(()=>{
 
-    render(<AddInternForm />)
+        expect(
+          screen.getByPlaceholderText(
+            "Intern Name"
+          )
+        )
+        .toHaveValue("")
 
-    const name =
-      screen.getByPlaceholderText("Intern Name")
-
-    const score =
-      screen.getByPlaceholderText("Score")
-
-    const checkbox =
-      screen.getByRole("checkbox")
-
-    const role =
-      screen.getByRole("combobox")
-
-    await user.type(name, "Rahul")
-    await user.clear(score)
-    await user.type(score, "95")
-    await user.click(checkbox)
-    await user.selectOptions(role, "Backend")
-
-    await user.click(
-      screen.getByRole("button", {
-        name: "Reset",
       })
-    )
 
-   expect(name).toHaveValue("")
-expect(score).toHaveValue(0)
-expect(checkbox).toBeChecked()
-expect(role).toHaveValue("Frontend")
+    })
+
   })
 
-  test("renders Add Intern button", () => {
-    render(<AddInternForm />)
-
-    expect(
-      screen.getByRole("button", {
-        name: "Add Intern",
-      })
-    ).toBeInTheDocument()
-  })
-
-  test("renders Reset button", () => {
-    render(<AddInternForm />)
-
-    expect(
-      screen.getByRole("button", {
-        name: "Reset",
-      })
-    ).toBeInTheDocument()
-  })
-
-  test("shows validation error when submitting an empty form", async () => {
-    const user = userEvent.setup()
-
-    render(<AddInternForm />)
-
-    await user.click(
-      screen.getByRole("button", {
-        name: "Add Intern",
-      })
-    )
-
-    // Update this text if your hook returns a different validation message.
-    expect(
-      screen.getByText(/required|error|name/i)
-    ).toBeInTheDocument()
-  })
 })

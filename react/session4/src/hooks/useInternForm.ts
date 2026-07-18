@@ -29,20 +29,23 @@ function useInternForm(): UseInternFormReturn {
   const [error, setError] = useState<string>("")
 
   function handleChange(
-    e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
-  ): void {
-    const { name, value, type } = e.target
+  e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
+): void {
+  const { name, value, type } = e.target
 
-    setForm((prev) => ({
-      ...prev,
-      [name]:
-        type === "checkbox"
-          ? (e.target as HTMLInputElement).checked
-          : name === "score"
+  // Clear any previous validation error
+  setError("")
+
+  setForm((prev) => ({
+    ...prev,
+    [name]:
+      type === "checkbox"
+        ? (e.target as HTMLInputElement).checked
+        : name === "score"
           ? Number(value)
           : value,
-    }))
-  }
+  }))
+}
 
   function handleReset(): void {
     setForm(initialForm)
