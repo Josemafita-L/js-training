@@ -4,6 +4,6 @@ export const ROUTES = {
   PRICING: "/pricing",
   PORTFOLIO: "/portfolio",
   REVIEWS: "/reviews",
-  PLAN_WEBSITE: "/plan-website",
-  BOOKING: "/booking",
-};
+  PLAN_WEBSITE: "/plan-my-website",
+  BOOK_CALL: "/book-call",
+} as const;

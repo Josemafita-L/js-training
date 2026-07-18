@@ -1,5 +1,31 @@
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
+import Home from "./pages/Home";
+import Templates from "./pages/Templates";
+import Pricing from "./pages/Pricing";
+import Portfolio from "./pages/Portfolio";
+import Reviews from "./pages/Reviews";
+import PlanWebsite from "./pages/PlanWebsite";
+import Booking from "./pages/Booking";
+import NotFound from "./pages/NotFound";
+
+import { ROUTES } from "./constants/routes";
+
 function App() {
-  return <h1>Customer-Centric Website</h1>;
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path={ROUTES.HOME} element={<Home />} />
+        <Route path={ROUTES.TEMPLATES} element={<Templates />} />
+        <Route path={ROUTES.PRICING} element={<Pricing />} />
+        <Route path={ROUTES.PORTFOLIO} element={<Portfolio />} />
+        <Route path={ROUTES.REVIEWS} element={<Reviews />} />
+        <Route path={ROUTES.PLAN_WEBSITE} element={<PlanWebsite />} />
+        <Route path={ROUTES.BOOK_CALL} element={<Booking />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </BrowserRouter>
+  );
 }
 
 export default App;
