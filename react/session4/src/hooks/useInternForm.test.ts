@@ -16,6 +16,7 @@ describe("useInternForm", () => {
   })
 
   test("updates name field", () => {
+    expect.hasAssertions()
     const { result } = renderHook(() => useInternForm())
 
     act(() => {
@@ -32,6 +33,7 @@ describe("useInternForm", () => {
   })
 
   test("updates score field", () => {
+    expect.hasAssertions()
     const { result } = renderHook(() => useInternForm())
 
     act(() => {
@@ -80,14 +82,23 @@ describe("useInternForm", () => {
   })
 
   test("fails validation when name is empty", () => {
-    const { result } = renderHook(() => useInternForm())
+  // Arrange
+  const { result } = renderHook(() => useInternForm())
 
-    act(() => {
-      result.current.isValid()
-    })
-
-    expect(result.current.error).toBe("Name is required")
+  // Act
+  act(() => {
+    result.current.isValid()
   })
+
+  // Assert
+  expect(result.current.error).toBe("Name is required")
+})
+/*
+Arrange creates the hook with its initial state.
+Act calls isValid() to perform validation.
+Assert verifies that the expected validation error is produced.
+Each phase is clearly separated.
+*/
 
   test("fails validation when score is greater than 100", () => {
   const { result } = renderHook(() => useInternForm())
@@ -122,6 +133,7 @@ describe("useInternForm", () => {
 })
 
   test("passes validation with valid data", () => {
+    expect.hasAssertions()
     const { result } = renderHook(() => useInternForm())
 
     act(() => {
@@ -142,8 +154,22 @@ describe("useInternForm", () => {
       } as React.ChangeEvent<HTMLInputElement>)
     })
 
-    expect(result.current.isValid()).toBe(true)
-    expect(result.current.error).toBe("")
+    let isValid = false
+
+act(() => {
+  isValid = result.current.isValid()
+})
+
+expect(isValid).toBe(true)
+expect(result.current.error).toBe("")
+/*
+Improved Test:
+The validation call is now wrapped in act() because
+isValid() updates React state by calling setError().
+
+This removes React warnings and better follows testing
+best practices.
+*/
   })
 
   test("reset restores initial form values", () => {
@@ -170,4 +196,52 @@ describe("useInternForm", () => {
 
     expect(result.current.error).toBe("")
   })
+})
+
+test("returns true when name is Sneha and score is 88", () => {
+  // Arrange
+  const { result } = renderHook(() => useInternForm())
+
+  // Act
+  act(() => {
+    result.current.handleChange({
+      target: {
+        name: "name",
+        value: "Sneha",
+        type: "text",
+      },
+    } as React.ChangeEvent<HTMLInputElement>)
+
+    result.current.handleChange({
+      target: {
+        name: "score",
+        value: "88",
+        type: "number",
+      },
+    } as React.ChangeEvent<HTMLInputElement>)
+  })
+
+  const isValid = result.current.isValid()
+
+  // Assert
+  expect(isValid).toBe(true)
+})
+
+test("updates the name field when handleChange is called with a name event", () => {
+  // Arrange
+  const { result } = renderHook(() => useInternForm())
+
+  // Act
+  act(() => {
+    result.current.handleChange({
+      target: {
+        name: "name",
+        value: "Sneha",
+        type: "text",
+      },
+    } as React.ChangeEvent<HTMLInputElement>)
+  })
+
+  // Assert
+  expect(result.current.form.name).toBe("Sneha")
 })
