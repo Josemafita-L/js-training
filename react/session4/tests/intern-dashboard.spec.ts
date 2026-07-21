@@ -60,6 +60,59 @@ test.describe('Locator Practice — getByRole', () => {
 // Since "Rahul" appears in multiple places in this application,
 // .first() is used to select the first matching element and
 // avoid Playwright's strict mode violation.
+test.describe('Assertions', () => {
+
+  // Navigate to the application before every test
+  // so each assertion starts from a clean state.
+  test.beforeEach(async ({ page }) => {
+    await page.goto('/');
+  });
+
+  // toHaveText() checks that the element's text matches
+  // exactly, whereas toContainText() only checks that the
+  // expected text is included within the element's text.
+  test('heading has the correct text', async ({ page }) => {
+    await expect(
+      page.getByRole('heading', { name: 'Intern Dashboard' })
+    ).toHaveText('Intern Dashboard');
+  });
+
+  test('theme toggle button contains the word "Dark"', async ({ page }) => {
+    await expect(
+      page.getByRole('button', { name: /switch to dark mode/i })
+    ).toContainText('Dark');
+  });
+
+  test('error message is not visible initially', async ({ page }) => {
+    await expect(
+      page.getByText('Name is required')
+    ).not.toBeVisible();
+  });
+
+  test('name input is empty initially', async ({ page }) => {
+    await expect(
+      page.getByPlaceholder('Intern Name')
+    ).toHaveValue('');
+  });
+
+  test('score input is 0 initially', async ({ page }) => {
+    await expect(
+      page.getByPlaceholder('Score')
+    ).toHaveValue('0');
+  });
+
+  test('correct number of Remove buttons matches the intern count', async ({ page }) => {
+    await expect(
+      page.getByRole('button', { name: 'Remove' })
+    ).toHaveCount(4);
+  });
+
+  // Observation:
+  // When toHaveCount(5) is used instead of toHaveCount(4),
+  // Playwright automatically retries until the timeout expires
+  // (about 5 seconds by default) before reporting that the
+  // expected count does not match the actual count.
+});
 test('finds text with exact matching', async ({ page }) => {
   await expect(
     page.getByText('Rahul').first()
