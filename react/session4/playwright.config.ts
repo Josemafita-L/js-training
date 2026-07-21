@@ -24,15 +24,13 @@ export default defineConfig({
     screenshot: 'only-on-failure',
   },
 
-  projects: [
-    // Desktop Chrome provides predefined browser settings such as
-    // viewport size, user agent, and device pixel ratio.
-    // Other available mobile presets include:
-    // - devices['iPhone 14']
-    // - devices['Pixel 7']
+ projects: [
+  { name: 'chromium', use: { ...devices['Desktop Chrome'] } },
 
-    { name: 'chromium', use: { ...devices['Desktop Chrome'] } },
-  ],
+  { name: 'firefox', use: { ...devices['Desktop Firefox'] } },
+
+  { name: 'webkit', use: { ...devices['Desktop Safari'] } },
+],
 
   // Automatically starts the Vite development server before running tests.
   webServer: {
