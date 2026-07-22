@@ -226,3 +226,33 @@ await expect(
 ).toBeVisible();
 
 });
+test.describe("Visual Testing", () => {
+
+  test.beforeEach(async ({ page }) => {
+    await page.goto("/");
+  });
+
+  test("intern dashboard matches the baseline screenshot", async ({ page }) => {
+
+    await expect(page).toHaveScreenshot("intern-dashboard.png");
+
+  });
+
+});
+// Findings:
+//
+// First run:
+// The test failed because no baseline screenshot existed.
+// Playwright captured the current page as the actual screenshot.
+//
+// After running with --update-snapshots:
+// A baseline screenshot was created.
+//
+// Second run:
+// Playwright compared the current page with the baseline,
+// and the test passed because both screenshots matched.
+//
+// After changing visible text:
+// The screenshot no longer matched the baseline,
+// so Playwright failed the test and generated diff images
+// showing the visual changes.
