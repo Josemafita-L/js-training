@@ -35,11 +35,14 @@ function AddInternForm() {
     >
       <h2>Add Intern</h2>
 
-      {error && (
-        <p style={{ color: "red" }}>
-          {error}
-        </p>
-      )}
+     {error && (
+  <p
+    role="alert"
+    style={{ color: "red" }}
+  >
+    {error}
+  </p>
+)}
 
       <div style={{ marginBottom: "10px" }}>
         <input
