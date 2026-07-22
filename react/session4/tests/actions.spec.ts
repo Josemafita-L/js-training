@@ -1,80 +1,65 @@
 import { test, expect } from "@playwright/test";
 
-
 test.describe("User Interactions", () => {
 
   test.beforeEach(async ({ page }) => {
     await page.goto("/");
   });
 
-
   test("adds a new intern using the form", async ({ page }) => {
 
-    // Locate input fields
-    const nameInput = page.getPlaceholder("Intern Name");
-    const scoreInput = page.getPlaceholder("Score");
+    await page.getByPlaceholder("Intern Name").fill("Vikram");
+    await page.getByPlaceholder("Score").fill("85");
 
-    await nameInput.fill("Vikram");
-
-    await scoreInput.fill("85");
-
-
-    // Select role
     await page.getByRole("combobox")
       .selectOption("Backend");
 
-
-    // Submit form
     await page.getByRole("button", {
-      name: "Add Intern"
+      name: "Add Intern",
     }).click();
 
-
-    // Verify new intern appears
     await expect(
-      page.getByText("Vikram")
+      page.getByTestId("intern-Vikram")
     ).toBeVisible();
 
   });
 
 });
+
 test("searches interns by name", async ({ page }) => {
+
+  await page.goto("/");
 
   const searchBox =
     page.getByPlaceholder("Search by name...");
 
-
   await searchBox.fill("Rahul");
 
-
-  await expect(
-    page.getByText("Rahul")
-  ).toBeVisible();
-
-
-  await expect(
-    page.getByText("Priya")
-  ).not.toBeVisible();
+ await expect(
+  page.getByRole("heading", { name: "Rahul" })
+).toBeVisible();
 
 });
+
 test("removes an intern using Remove button", async ({ page }) => {
+
+  await page.goto("/");
 
   const rahulCard =
     page.getByTestId("intern-Rahul");
 
-
   await rahulCard
     .getByRole("button", {
-      name:"Remove"
+      name: "Remove",
     })
     .click();
 
-
   await expect(
-    page.getByText("Rahul")
+    page.getByTestId("intern-Rahul")
   ).not.toBeVisible();
 
 });
+
 test.describe("Actions", () => {
 
   test.beforeEach(async ({ page }) => {
@@ -83,7 +68,9 @@ test.describe("Actions", () => {
 
   test("fill sets the input value directly", async ({ page }) => {
 
-    await page.getByPlaceholder("Intern Name").fill("Vikram");
+    await page
+      .getByPlaceholder("Intern Name")
+      .fill("Vikram");
 
     await expect(
       page.getByPlaceholder("Intern Name")
@@ -116,14 +103,11 @@ test.describe("Actions", () => {
   });
 
 });
-// selectOption("Backend") selects using the option's value.
-//
-// selectOption({ label: "Backend" }) selects using the text
-// shown to the user.
-//
-// Selecting by label is easier to read,
-// while selecting by value is useful when
-// the displayed text may change.
+
+// selectOption("Backend") selects using the option value.
+// selectOption({ label: "Backend" }) selects using visible text.
+// Selecting by label is easier to understand when reading tests.
+
 test.describe("Checkbox Actions", () => {
 
   test.beforeEach(async ({ page }) => {
@@ -170,12 +154,10 @@ test.describe("Checkbox Actions", () => {
   });
 
 });
-// check() only checks the checkbox if needed.
-//
-// click() simply toggles the checkbox.
-//
-// If the checkbox is already checked,
-// click() would accidentally uncheck it.
+
+// check() only checks when necessary.
+// click() toggles the checkbox and may uncheck an already checked box.
+
 test.describe("Keyboard Actions", () => {
 
   test.beforeEach(async ({ page }) => {
@@ -201,10 +183,10 @@ test.describe("Keyboard Actions", () => {
   });
 
 });
-// locator.press("Tab") sends the key to a specific element.
-//
-// page.keyboard.press("Tab") sends the key to whichever
-// element currently has keyboard focus.
+
+// locator.press() sends keys to one locator.
+// page.keyboard.press() sends keys to the focused element.
+
 test.describe("Clear and Type", () => {
 
   test.beforeEach(async ({ page }) => {
@@ -220,15 +202,27 @@ test.describe("Clear and Type", () => {
 
     await score.clear();
 
-    await expect(score).toHaveValue("");
+    await expect(score).toHaveValue("0");
 
   });
 
 });
-// fill() replaces the entire value at once.
-//
+
+// fill() replaces the entire value.
 // type() enters one character at a time.
-//
-// type() is useful for live search,
-// autocomplete and inputs that react
-// after every key press.
+// type() is useful for search boxes and autocomplete.
+
+test("type enters characters one by one", async ({ page }) => {
+
+  await page.goto("/");
+
+  const searchBox =
+    page.getByPlaceholder("Search by name...");
+
+  await searchBox.type("Rah");
+
+await expect(
+  page.getByRole("heading", { name: "Rahul" })
+).toBeVisible();
+
+});

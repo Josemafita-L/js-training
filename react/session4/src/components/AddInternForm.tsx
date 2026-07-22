@@ -76,10 +76,11 @@ function AddInternForm() {
 
       <div style={{ marginBottom: "10px" }}>
         <select
-          name="role"
-          value={form.role}
-          onChange={handleChange}
-        >
+  aria-label="Role"
+  name="role"
+  value={form.role}
+  onChange={handleChange}
+>
           <option value="Frontend">
             Frontend
           </option>
