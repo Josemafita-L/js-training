@@ -23,7 +23,7 @@ function Navbar() {
         justifyContent: "space-between",
       }}
     >
-      <span>Intern Dashboard</span>
+      <h1>Intern Dashboard</h1>
 
       <button onClick={toggleTheme}>
         Switch to{" "}

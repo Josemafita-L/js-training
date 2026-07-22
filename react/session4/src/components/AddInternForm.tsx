@@ -19,7 +19,13 @@ function AddInternForm() {
   }
 
   return (
-    <div
+    <form
+      data-testid="add-intern-form"
+      aria-label="Add Intern"
+      onSubmit={(e) => {
+        e.preventDefault()
+        handleSubmit()
+      }}
       style={{
         border: "1px solid #ccc",
         padding: "20px",
@@ -29,11 +35,14 @@ function AddInternForm() {
     >
       <h2>Add Intern</h2>
 
-      {error && (
-        <p style={{ color: "red" }}>
-          {error}
-        </p>
-      )}
+     {error && (
+  <p
+    role="alert"
+    style={{ color: "red" }}
+  >
+    {error}
+  </p>
+)}
 
       <div style={{ marginBottom: "10px" }}>
         <input
@@ -70,10 +79,11 @@ function AddInternForm() {
 
       <div style={{ marginBottom: "10px" }}>
         <select
-          name="role"
-          value={form.role}
-          onChange={handleChange}
-        >
+  aria-label="Role"
+  name="role"
+  value={form.role}
+  onChange={handleChange}
+>
           <option value="Frontend">
             Frontend
           </option>
@@ -88,11 +98,12 @@ function AddInternForm() {
         </select>
       </div>
 
-      <button onClick={handleSubmit}>
+      <button type="submit">
         Add Intern
       </button>
 
       <button
+        type="button"
         onClick={handleReset}
         style={{
           marginLeft: "10px",
@@ -100,7 +111,7 @@ function AddInternForm() {
       >
         Reset
       </button>
-    </div>
+    </form>
   )
 }
 
