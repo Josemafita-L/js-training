@@ -19,7 +19,13 @@ function AddInternForm() {
   }
 
   return (
-    <div
+    <form
+      data-testid="add-intern-form"
+      aria-label="Add Intern"
+      onSubmit={(e) => {
+        e.preventDefault()
+        handleSubmit()
+      }}
       style={{
         border: "1px solid #ccc",
         padding: "20px",
@@ -88,11 +94,12 @@ function AddInternForm() {
         </select>
       </div>
 
-      <button onClick={handleSubmit}>
+      <button type="submit">
         Add Intern
       </button>
 
       <button
+        type="button"
         onClick={handleReset}
         style={{
           marginLeft: "10px",
@@ -100,7 +107,7 @@ function AddInternForm() {
       >
         Reset
       </button>
-    </div>
+    </form>
   )
 }
 
