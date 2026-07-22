@@ -90,8 +90,10 @@ test("fills the form using scoped locators", async ({ page }) => {
   await form.getByLabel("Present").check();
 
   await form.getByRole("button", { name: "Add Intern" }).click();
-
-  await expect(page.getByText("Vikram")).toBeVisible();
+await expect(
+  page.getByRole("heading", { name: "Vikram" })
+).toBeVisible();
+  
 });
 
 // Scoping locators to a form prevents Playwright
@@ -100,3 +102,26 @@ test("fills the form using scoped locators", async ({ page }) => {
 //
 // It also avoids false-positive tests when buttons
 // or inputs with the same labels exist elsewhere.
+// test("debug: inspect form state mid-test", async ({ page }) => {
+//   await page.goto("/");
+
+//   await page.getByPlaceholder("Intern Name").fill("Debug Intern");
+
+//   await page.pause();
+
+//   await page.getByRole("button", {
+//     name: "Add Intern",
+//   }).click();
+
+//   await expect(
+//     page.getByText("Debug Intern")
+//   ).toBeVisible();
+// });
+
+/*
+page.pause() is useful when:
+
+1. A locator is failing and I want to inspect the DOM and verify which element Playwright is trying to locate.
+
+2. A form is not updating correctly and I want to inspect the page before the next action executes.
+*/

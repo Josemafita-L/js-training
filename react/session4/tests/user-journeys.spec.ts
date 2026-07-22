@@ -146,6 +146,13 @@ test.describe("User Journey - Search and Filter", () => {
     await expect(
       page.getByRole("heading", { name: "Rahul" })
     ).toBeVisible();
+    /*
+The Playwright Inspector showed each step of the test,
+highlighted the locator being searched,
+and displayed that no matching element existed.
+This is easier than reading only the terminal error because
+I can inspect the page visually while the test is paused.
+*/
 
     await expect(
       page.getByRole("heading", { name: "Priya" })

@@ -98,3 +98,27 @@ test.describe("Journeys via Page Object", () => {
   });
 
 });
+
+test("chromium-only feature check", async ({
+  page,
+  browserName,
+}) => {
+
+  test.skip(
+    browserName !== "chromium",
+    "Chromium only"
+  );
+
+  await page.goto("/");
+
+  await expect(
+    page.getByText("Intern Dashboard")
+  ).toBeVisible();
+
+});
+/*
+test.skip(browserName !== "chromium")
+is useful when testing browser-specific APIs
+such as the File System Access API,
+which is not fully supported across all browsers.
+*/

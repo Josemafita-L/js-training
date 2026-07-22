@@ -213,4 +213,11 @@ test.describe('only and skip research', () => {
 
 
 
+
 });
+/*
+Soft assertions continue executing even after one assertion fails.
+They are useful for smoke tests where we want to collect
+multiple failures in a single run.
+*/
+
