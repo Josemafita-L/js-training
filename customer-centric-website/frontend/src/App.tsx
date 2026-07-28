@@ -12,11 +12,17 @@ import Reviews from "./pages/Reviews";
 import PlanWebsite from "./pages/PlanWebsite";
 import Booking from "./pages/Booking";
 import NotFound from "./pages/NotFound";
+import Admin from "./pages/Admin";
+import Login from "./pages/Login";
+
+import ProtectedRoute from "./components/common/ProtectedRoute";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
+
+        {/* Public pages with Navbar & Footer */}
         <Route element={<MainLayout />}>
           <Route path={ROUTES.HOME} element={<Home />} />
           <Route path={ROUTES.TEMPLATES} element={<Templates />} />
@@ -27,7 +33,22 @@ function App() {
           <Route path={ROUTES.BOOK_CALL} element={<Booking />} />
         </Route>
 
+        {/* Login page (No Navbar) */}
+        <Route path="/login" element={<Login />} />
+
+        {/* Admin page (No Navbar) */}
+        <Route
+          path="/admin"
+          element={
+            <ProtectedRoute>
+              <Admin />
+            </ProtectedRoute>
+          }
+        />
+
+        {/* 404 */}
         <Route path="*" element={<NotFound />} />
+
       </Routes>
     </BrowserRouter>
   );

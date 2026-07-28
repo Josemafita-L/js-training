@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 
 import Container from "../common/Container";
 import Button from "../common/Button";
@@ -6,6 +6,8 @@ import Button from "../common/Button";
 import { ROUTES } from "../../constants/routes";
 
 export default function Navbar() {
+  const token = localStorage.getItem("token");
+
   const navLinkClass = ({ isActive }: { isActive: boolean }) =>
     isActive
       ? "font-semibold text-blue-600"
@@ -79,6 +81,8 @@ export default function Navbar() {
               </NavLink>
             </li>
 
+            
+
             <li>
               <NavLink
                 to={ROUTES.BOOK_CALL}
@@ -88,6 +92,18 @@ export default function Navbar() {
               </NavLink>
             </li>
           </ul>
+
+          {/* Show Admin Login only if not logged in */}
+            {!token && (
+              
+                <Link
+                  to="/login"
+                  className="rounded-md border border-blue-600 px-4 py-2 text-blue-600 transition hover:bg-blue-600 hover:text-white"
+                >
+                  Admin Login
+                </Link>
+              
+            )}
 
           {/* CTA Button */}
           <NavLink to={ROUTES.BOOK_CALL}>

@@ -1,10 +1,14 @@
 import type { ChangeEvent, FormEvent } from "react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
+
 import Button from "../../components/common/Button";
 import Container from "../../components/common/Container";
 import SectionTitle from "../../components/common/SectionTitle";
+
 import { submitBooking } from "../../api/booking";
+import { getSlots } from "../../api/slot";
+
 import type { BookingFormData } from "../../types/Booking";
 
 const initialState: BookingFormData = {
@@ -21,115 +25,154 @@ const initialState: BookingFormData = {
 export default function Booking() {
   const [formData, setFormData] =
     useState<BookingFormData>(initialState);
+
   const [errors, setErrors] = useState({
-  fullName: "",
-  email: "",
-  phone: "",
-});
-const [loading, setLoading] = useState(false);
-  const handleChange = (
-  event: ChangeEvent<
-    HTMLInputElement |
-    HTMLTextAreaElement |
-    HTMLSelectElement
-  >
-) => {
-  const { name, value } = event.target;
-
-  setFormData((previous) => ({
-    ...previous,
-    [name]: value,
-  }));
-
-  if (name in errors) {
-    setErrors((previous) => ({
-      ...previous,
-      [name]: "",
-    }));
-  }
-};
-const validateForm = () => {
-  const newErrors = {
     fullName: "",
     email: "",
     phone: "",
+  });
+
+  const [loading, setLoading] = useState(false);
+
+  const [slots, setSlots] = useState<any[]>([]);
+  const [selectedSlot, setSelectedSlot] = useState("");
+
+  useEffect(() => {
+    fetchSlots();
+  }, []);
+
+  const fetchSlots = async () => {
+  try {
+    const data = await getSlots();
+
+    console.log("Slots from API:", data);
+
+    setSlots(data.filter((slot: any) => slot.available));
+  } catch (error) {
+    console.error("Error fetching slots:", error);
+  }
+};
+
+  const handleChange = (
+    event: ChangeEvent<
+      HTMLInputElement |
+      HTMLTextAreaElement |
+      HTMLSelectElement
+    >
+  ) => {
+    const { name, value } = event.target;
+
+    setFormData((previous) => ({
+      ...previous,
+      [name]: value,
+    }));
+
+    if (name in errors) {
+      setErrors((previous) => ({
+        ...previous,
+        [name]: "",
+      }));
+    }
   };
 
-  let isValid = true;
-
-  if (!formData.fullName.trim()) {
-    newErrors.fullName = "Full Name is required";
-    isValid = false;
-  }
-
-  if (!formData.email.trim()) {
-    newErrors.email = "Email is required";
-    isValid = false;
-  } else if (
-    !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(
-      formData.email
-    )
-  ) {
-    newErrors.email = "Enter a valid email";
-    isValid = false;
-  }
-
-  if (!formData.phone.trim()) {
-    newErrors.phone = "Phone Number is required";
-    isValid = false;
-  } else if (
-    !/^[0-9]{10}$/.test(formData.phone)
-  ) {
-    newErrors.phone =
-      "Enter a valid 10-digit phone number";
-    isValid = false;
-  }
-
-  setErrors(newErrors);
-
-  return isValid;
-};
-  const handleSubmit = async (
-  event: FormEvent
-) => {
-  event.preventDefault();
-
-  if (!validateForm()) {
-    toast.error("Please fix the errors.");
-    return;
-  }
-
-  setLoading(true);
-
-  try {
-    await submitBooking(formData);
-
-    toast.success(
-      "Discovery Call Booked Successfully!"
-    );
-
-    setFormData(initialState);
-
-    setErrors({
+  const validateForm = () => {
+    const newErrors = {
       fullName: "",
       email: "",
       phone: "",
-    });
+    };
 
-  } catch (error) {
+    let isValid = true;
 
-    toast.error(
-      "Something went wrong."
+    if (!formData.fullName.trim()) {
+      newErrors.fullName = "Full Name is required";
+      isValid = false;
+    }
+
+    if (!formData.email.trim()) {
+      newErrors.email = "Email is required";
+      isValid = false;
+    } else if (
+      !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(
+        formData.email
+      )
+    ) {
+      newErrors.email = "Enter a valid email";
+      isValid = false;
+    }
+
+    if (!formData.phone.trim()) {
+      newErrors.phone = "Phone Number is required";
+      isValid = false;
+    } else if (
+      !/^[0-9]{10}$/.test(formData.phone)
+    ) {
+      newErrors.phone =
+        "Enter a valid 10-digit phone number";
+      isValid = false;
+    }
+
+    setErrors(newErrors);
+
+    return isValid;
+  };
+
+  const handleSubmit = async (
+    event: FormEvent
+  ) => {
+    event.preventDefault();
+
+    if (!validateForm()) {
+      toast.error("Please fix the errors.");
+      return;
+    }
+
+    if (!selectedSlot) {
+      toast.error("Please select a slot.");
+      return;
+    }
+
+    const slot = slots.find(
+      (s: any) => s.ID === Number(selectedSlot)
     );
 
-    console.error(error);
+    if (!slot) {
+      toast.error("Invalid slot selected.");
+      return;
+    }
 
-  } finally {
+    setLoading(true);
 
-    setLoading(false);
+    try {
+      await submitBooking({
+  ...formData,
+  date: slot.date,
+  time: slot.time,
+  slotId: slot.ID,
+});
 
-  }
-};
+      toast.success(
+        "Discovery Call Booked Successfully!"
+      );
+
+      setFormData(initialState);
+      setSelectedSlot("");
+
+      setErrors({
+        fullName: "",
+        email: "",
+        phone: "",
+      });
+
+      fetchSlots();
+
+    } catch (error) {
+      toast.error("Something went wrong.");
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <section className="bg-gray-50 py-20">
@@ -235,42 +278,42 @@ const validateForm = () => {
                 <option value="Above ₹50,000">Above ₹50,000</option>
               </select>
             </div>
+          <div className="md:col-span-2">
+  <label className="mb-2 block font-medium">
+    Available Discovery Slots
+  </label>
 
-            <div>
-              <label className="mb-2 block font-medium">
-                Preferred Date
-              </label>
+  <select
+  value={selectedSlot}
+  onChange={(e) => setSelectedSlot(e.target.value)}
+  className="w-full rounded-lg border border-gray-300 p-3"
+>
+  <option value="">Select a Slot</option>
 
-              <input
-                type="date"
-                name="date"
-                value={formData.date}
-                onChange={handleChange}
-                className="w-full rounded-lg border border-gray-300 p-3"
-              />
-            </div>
+  {slots.map((slot: any) => (
+    <option key={slot.ID} value={slot.ID}>
+      {new Date(slot.date).toLocaleDateString("en-IN", {
+        day: "2-digit",
+        month: "short",
+        year: "numeric",
+      })}
+      {" • "}
+      {new Date(`1970-01-01T${slot.time}`).toLocaleTimeString("en-IN", {
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: true,
+      })}
+    </option>
+  ))}
+</select>
 
-            <div>
-              <label className="mb-2 block font-medium">
-                Preferred Time
-              </label>
-
-              <select
-                name="time"
-                value={formData.time}
-                onChange={handleChange}
-                className="w-full rounded-lg border border-gray-300 p-3"
-              >
-                <option value="">Select Time</option>
-                <option>09:00 AM</option>
-                <option>10:00 AM</option>
-                <option>11:00 AM</option>
-                <option>02:00 PM</option>
-                <option>03:00 PM</option>
-                <option>04:00 PM</option>
-              </select>
-            </div>
-          </div>
+  {slots.length === 0 && (
+    <p className="mt-2 text-red-500">
+      No slots available.
+    </p>
+  )}
+</div>
+</div>
 
           <div className="mt-8">
             <label className="mb-2 block font-medium">

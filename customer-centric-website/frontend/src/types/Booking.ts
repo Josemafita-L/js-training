@@ -7,4 +7,6 @@ export interface BookingFormData {
   date: string;
   time: string;
   notes: string;
+
+  slotId?: number;
 }

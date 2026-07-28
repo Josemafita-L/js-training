@@ -33,7 +33,7 @@ export default function Hero() {
               </Link>
 
               <Link to={ROUTES.PORTFOLIO}>
-                <Button className="bg-gray-800 hover:bg-gray-900">
+                <Button >
                   View Portfolio
                 </Button>
               </Link>

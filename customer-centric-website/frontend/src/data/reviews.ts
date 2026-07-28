@@ -15,7 +15,8 @@ export const reviews: Review[] = [
     rating: 5,
     comment:
       "Excellent service! The team delivered our website on time and exceeded expectations.",
-    avatar: "https://placehold.co/100x100",
+    avatar: "/images/reviews/abc.png",
+    
   },
   {
     id: 2,
@@ -24,7 +25,7 @@ export const reviews: Review[] = [
     rating: 5,
     comment:
       "Very professional and easy to work with. Highly recommended!",
-    avatar: "https://placehold.co/100x100",
+    avatar: "/images/reviews/creative_studio.png",
   },
   {
     id: 3,
@@ -33,6 +34,6 @@ export const reviews: Review[] = [
     rating: 4,
     comment:
       "Great communication throughout the project and excellent support.",
-    avatar: "https://placehold.co/100x100",
+    avatar: "/images/reviews/healthcare_plus.png",
   },
 ];
