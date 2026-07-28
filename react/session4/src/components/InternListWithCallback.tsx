@@ -30,6 +30,7 @@ const InternRow = memo(function InternRow({
 
   return (
     <div
+      data-testid={`intern-${name}`}
       style={{
         background: theme === "light" ? "#ffffff" : "#2a2a2a",
         color: theme === "light" ? "#000000" : "#eeeeee",
@@ -75,7 +76,10 @@ function InternListWithCallback() {
   )
 
   return (
-    <div style={{ marginTop: "25px" }}>
+    <div
+      data-testid="intern-list"
+      style={{ marginTop: "25px" }}
+    >
       <h2>Intern List</h2>
 
       {interns.map((intern) => (
