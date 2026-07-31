@@ -1,0 +1,21 @@
+import { beforeEach, describe, expect, test } from 'vitest'
+
+let interns: { id: number; name: string }[]
+
+beforeEach(() => {
+  interns = []
+})
+
+describe('Independent tests', () => {
+  test('can add first intern', () => {
+    interns.push({ id: 1, name: 'Rahul' })
+
+    expect(interns).toHaveLength(1)
+  })
+
+  test('can add second intern', () => {
+    interns.push({ id: 2, name: 'Priya' })
+
+    expect(interns).toHaveLength(1)
+  })
+})
