@@ -6,6 +6,12 @@ import {
   ReactNode,
 } from "react"
 
+
+interface InternProviderProps {
+  children: React.ReactNode
+  generateId?: () => number
+}
+
 interface Intern {
   id: number
   name: string
@@ -17,7 +23,7 @@ interface Intern {
 interface InternContextType {
   interns: Intern[]
   isLoading: boolean
-  addIntern: (intern: Intern) => void
+ addIntern: (intern: Omit<Intern, "id">) => void
   removeIntern: (id: number) => void
 }
 
@@ -28,9 +34,8 @@ const InternContext =
 
 export function InternProvider({
   children,
-}: {
-  children: ReactNode
-}) {
+  generateId = Date.now,
+}: InternProviderProps) {
   const [interns, setInterns] =
     useState<Intern[]>([])
 
@@ -73,15 +78,15 @@ export function InternProvider({
       setIsLoading(false)
     }, 800)
   }, [])
-
-  function addIntern(
-    intern: Intern
-  ): void {
-    setInterns((prev) => [
-      ...prev,
-      intern,
-    ])
-  }
+function addIntern(intern: Omit<Intern, "id">): void {
+  setInterns((prev) => [
+    ...prev,
+    {
+      ...intern,
+      id: generateId(),
+    },
+  ])
+}
 
   function removeIntern(
     id: number
