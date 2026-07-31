@@ -1,23 +1,48 @@
 import { useMemo } from "react"
 import { useInterns } from "../contexts/intern-context"
 
-function ScoreStats() {
+interface ScoreStatsProps {
+  highest: number
+  lowest: number
+  average: number
+  passing: number
+  total: number
+}
+
+export function ScoreStats({
+  highest,
+  lowest,
+  average,
+  passing,
+  total,
+}: ScoreStatsProps) {
+  return (
+    <div
+      style={{
+        background: "#f9f9f9",
+        padding: "15px",
+        borderRadius: "8px",
+        marginBottom: "20px",
+      }}
+    >
+      <h2>Score Statistics</h2>
+
+      <p>Highest Score : {highest}</p>
+
+      <p>Lowest Score : {lowest}</p>
+
+      <p>Average Score : {average}</p>
+
+      <p>
+        Passing Interns : {passing} / {total}
+      </p>
+    </div>
+  )
+}
+export function ScoreStatsContainer() {
   const { interns } = useInterns()
 
-  /*
-  Why useMemo here?
-
-  Without useMemo, the statistics would be recalculated
-  every time this component renders, even if the interns
-  array has not changed.
-
-  useMemo caches the calculated result and only recalculates
-  when the interns dependency changes, improving performance
-  for expensive computations.
-  */
   const stats = useMemo(() => {
-    console.log("Recalculating stats...")
-
     const scores = interns.map((intern) => intern.score)
 
     return {
@@ -48,33 +73,14 @@ function ScoreStats() {
   }, [interns])
 
   return (
-    <div
-      style={{
-        background: "#f9f9f9",
-        padding: "15px",
-        borderRadius: "8px",
-        marginBottom: "20px",
-      }}
-    >
-      <h2>Score Statistics</h2>
-
-      <p>
-        Highest Score : {stats.highest}
-      </p>
-
-      <p>
-        Lowest Score : {stats.lowest}
-      </p>
-
-      <p>
-        Average Score : {stats.average}
-      </p>
-
-      <p>
-        Passing Interns : {stats.passing} / {interns.length}
-      </p>
-    </div>
+    <ScoreStats
+      highest={stats.highest}
+      lowest={stats.lowest}
+      average={stats.average}
+      passing={stats.passing}
+      total={interns.length}
+    />
   )
 }
 
-export default ScoreStats
+export default ScoreStatsContainer
