@@ -1,5 +1,19 @@
+// Testability Audit — useInternForm.ts
+//
+// Q1. Predictable output?
+// PARTIALLY — Validation is predictable, but the hook manages React state,
+// so the output depends on the current state.
+//
+// Q2. Can it run without external dependencies?
+// YES — It does not use a server, database, timer, or API.
+//
+// Q3. Can dependencies be replaced?
+// NO — The validation logic is tightly coupled to the hook's internal state.
+//
+// Verdict:
+// MODERATELY TESTABLE
 import { ChangeEvent, useState } from "react"
-
+import { validateInternForm } from "../utils/intern-validation"
 interface InternFormState {
   name: string
   score: number
@@ -50,19 +64,19 @@ function useInternForm(): UseInternFormReturn {
   }
 
   function isValid(): boolean {
-    if (!form.name.trim()) {
-      setError("Name is required")
-      return false
-    }
+  const validationError = validateInternForm(
+    form.name,
+    form.score
+  )
 
-    if (form.score < 0 || form.score > 100) {
-      setError("Score must be between 0 and 100")
-      return false
-    }
-
-    setError("")
-    return true
+  if (validationError) {
+    setError(validationError)
+    return false
   }
+
+  setError("")
+  return true
+}
 
   return {
     form,

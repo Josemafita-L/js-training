@@ -50,7 +50,7 @@ function App() {
           padding: "16px",
         }}
       >
-        <ScoreStats />
+        <ScoreStatsContainer />
 
         <AddInternForm />
 
