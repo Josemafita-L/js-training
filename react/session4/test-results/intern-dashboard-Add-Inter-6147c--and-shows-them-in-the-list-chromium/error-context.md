@@ -12,219 +12,25 @@
 # Error details
 
 ```
-Test timeout of 30000ms exceeded.
-```
-
-```
-Error: locator.fill: Test timeout of 30000ms exceeded.
+Error: locator.fill: Target page, context or browser has been closed
 Call log:
   - waiting for getByPlaceholder('Intern Name')
 
 ```
 
-# Test source
+```
+Error: browserContext.close: Test ended.
+Browser logs:
 
-```ts
-  117 |   });
-  118 | 
-  119 |   test('finds text with regex matching', async ({ page }) => {
-  120 | 
-  121 |     // Multiple score elements match the regex.
-  122 |     // .first() avoids Playwright strict mode violations.
-  123 |     await expect(
-  124 |       page.getByText(/Score: \d+/).first()
-  125 |     ).toBeVisible();
-  126 |   });
-  127 | 
-  128 |   test('asserts that an absent element is not visible', async ({ page }) => {
-  129 | 
-  130 |     await expect(
-  131 |       page.getByText('Placeholder')
-  132 |     ).not.toBeVisible();
-  133 |   });
-  134 | 
-  135 | });
-  136 | 
-  137 | //
-  138 | // SECTION 4 — ASSERTIONS
-  139 | //
-  140 | test.describe('Assertions', () => {
-  141 | 
-  142 |   test.beforeEach(async ({ page }) => {
-  143 |     await page.goto('/');
-  144 |   });
-  145 | 
-  146 |   // toHaveText() checks for an exact text match.
-  147 |   // toContainText() only checks that the expected
-  148 |   // text appears somewhere inside the element.
-  149 |   test('heading has the correct text', async ({ page }) => {
-  150 | 
-  151 |     await expect(
-  152 |       page.getByRole('heading', {
-  153 |         name: 'Intern Dashboard',
-  154 |       })
-  155 |     ).toHaveText('Intern Dashboard');
-  156 |   });
-  157 | 
-  158 |   test('theme toggle button contains the word "Dark"', async ({ page }) => {
-  159 | 
-  160 |     await expect(
-  161 |       page.getByRole('button', {
-  162 |         name: /switch to dark mode/i,
-  163 |       })
-  164 |     ).toContainText('Dark');
-  165 |   });
-  166 | 
-  167 |   test('error message is not visible initially', async ({ page }) => {
-  168 | 
-  169 |     await expect(
-  170 |       page.getByText('Name is required')
-  171 |     ).not.toBeVisible();
-  172 |   });
-  173 | 
-  174 |   test('name input is empty initially', async ({ page }) => {
-  175 | 
-  176 |     await expect(
-  177 |       page.getByPlaceholder('Intern Name')
-  178 |     ).toHaveValue('');
-  179 |   });
-  180 | 
-  181 |   test('score input is 0 initially', async ({ page }) => {
-  182 | 
-  183 |     await expect(
-  184 |       page.getByPlaceholder('Score')
-  185 |     ).toHaveValue('0');
-  186 |   });
-  187 | 
-  188 |   test('correct number of Remove buttons matches the intern count', async ({ page }) => {
-  189 | 
-  190 |     await expect(
-  191 |       page.getByRole('button', {
-  192 |         name: 'Remove',
-  193 |       })
-  194 |     ).toHaveCount(4);
-  195 |   });
-  196 | 
-  197 |   // Observation:
-  198 |   // If toHaveCount(5) is used instead of toHaveCount(4),
-  199 |   // Playwright retries automatically for about 5 seconds
-  200 |   // before reporting the assertion failure.
-  201 | 
-  202 | });
-  203 | //
-  204 | // SECTION 5 — ADD INTERN JOURNEY
-  205 | //
-  206 | test.describe('Add Intern Journey', () => {
-  207 | 
-  208 |   test.beforeEach(async ({ page }) => {
-  209 |     await page.goto('/');
-  210 |   });
-  211 | 
-  212 |   // Unlike a unit test, this verifies the complete end-to-end flow:
-  213 |   // filling the real form, clicking the real button, updating state,
-  214 |   // and rendering the new intern in the browser.
-  215 |   test('adds a new intern and shows them in the list', async ({ page }) => {
-  216 | 
-> 217 |     await page.getByPlaceholder('Intern Name').fill('Vikram');
-      |                                                ^ Error: locator.fill: Test timeout of 30000ms exceeded.
-  218 | 
-  219 |     await page.getByPlaceholder('Score').clear();
-  220 |     await page.getByPlaceholder('Score').fill('88');
-  221 | 
-  222 |     await page.getByRole('button', {
-  223 |       name: 'Add Intern',
-  224 |     }).click();
-  225 | 
-  226 |     await expect(
-  227 |       page.getByText('Vikram').first()
-  228 |     ).toBeVisible();
-  229 | 
-  230 |     await expect(
-  231 |       page.getByText('Score: 88')
-  232 |     ).toBeVisible();
-  233 |   });
-  234 | 
-  235 |   test('intern count increases after adding', async ({ page }) => {
-  236 | 
-  237 |     await expect(
-  238 |       page.getByRole('button', { name: 'Remove' })
-  239 |     ).toHaveCount(4);
-  240 | 
-  241 |     await page.getByPlaceholder('Intern Name').fill('Vikram');
-  242 | 
-  243 |     await page.getByRole('button', {
-  244 |       name: 'Add Intern',
-  245 |     }).click();
-  246 | 
-  247 |     await expect(
-  248 |       page.getByRole('button', { name: 'Remove' })
-  249 |     ).toHaveCount(5);
-  250 |   });
-  251 | 
-  252 |   test('form clears after successful submission', async ({ page }) => {
-  253 | 
-  254 |     await page.getByPlaceholder('Intern Name').fill('Vikram');
-  255 | 
-  256 |     await page.getByPlaceholder('Score').clear();
-  257 |     await page.getByPlaceholder('Score').fill('88');
-  258 | 
-  259 |     await page.getByRole('button', {
-  260 |       name: 'Add Intern',
-  261 |     }).click();
-  262 | 
-  263 |     await expect(
-  264 |       page.getByPlaceholder('Intern Name')
-  265 |     ).toHaveValue('');
-  266 |   });
-  267 | 
-  268 |   // Playwright automatically waits for UI updates.
-  269 |   // not.toBeVisible() is preferred over queryByText()
-  270 |   // because Playwright retries until the element disappears.
-  271 |   test('shows validation error when name is empty', async ({ page }) => {
-  272 | 
-  273 |     await page.getByRole('button', {
-  274 |       name: 'Add Intern',
-  275 |     }).click();
-  276 | 
-  277 |     await expect(
-  278 |       page.getByText('Name is required')
-  279 |     ).toBeVisible();
-  280 |   });
-  281 | 
-  282 |   test('does not add intern when form is invalid', async ({ page }) => {
-  283 | 
-  284 |     await page.getByRole('button', {
-  285 |       name: 'Add Intern',
-  286 |     }).click();
-  287 | 
-  288 |     await expect(
-  289 |       page.getByRole('button', {
-  290 |         name: 'Remove',
-  291 |       })
-  292 |     ).toHaveCount(4);
-  293 |   });
-  294 | 
-  295 |   test('validation error disappears after name is entered', async ({ page }) => {
-  296 | 
-  297 |     await page.getByRole('button', {
-  298 |       name: 'Add Intern',
-  299 |     }).click();
-  300 | 
-  301 |     await expect(
-  302 |       page.getByText('Name is required')
-  303 |     ).toBeVisible();
-  304 | 
-  305 |     await page.getByPlaceholder('Intern Name').fill('Vikram');
-  306 | 
-  307 |     await expect(
-  308 |       page.getByText('Name is required')
-  309 |     ).not.toBeVisible();
-  310 |   });
-  311 | 
-  312 | });
-  313 | 
-  314 | //
-  315 | // SECTION 5 — REMOVE INTERN JOURNEY
-  316 | //
-  317 | test.describe('Remove Intern Journey', () => {
+<launching> C:\Users\Josemafita\AppData\Local\ms-playwright\chromium_headless_shell-1228\chrome-headless-shell-win64\chrome-headless-shell.exe --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-edgeupdater --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,BoundaryEventDispatchTracksNodeRemoval,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,Translate,AutoDeElevate,RenderDocument,OptimizationHints,msForceBrowserSignIn,msEdgeUpdateLaunchServicesPreferredVersion --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --user-data-dir=C:\Users\JOSEMA~1\AppData\Local\Temp\playwright_chromiumdev_profile-BB42dC --remote-debugging-pipe --no-startup-window
+<launched> pid=20148
+[pid=20148][err] [0804/115918.815:INFO:CONSOLE:851] "[vite] connecting...", source: http://localhost:5173/@vite/client (851)
+[pid=20148][err] [0804/115918.821:INFO:CONSOLE:955] "[vite] connected.", source: http://localhost:5173/@vite/client (955)
+[pid=20148][err] [0804/115918.901:INFO:CONSOLE:14336] "%cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold", source: http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=9c2665eb (14336)
+[pid=20148][err] [0804/115919.749:INFO:CONSOLE:52] "Uncaught ReferenceError: ScoreStatsContainer is not defined", source: http://localhost:5173/src/App.tsx (52)
+[pid=20148][err] [0804/115919.751:INFO:CONSOLE:5258] "%s
+[pid=20148][err] 
+[pid=20148][err] %s
+[pid=20148][err]  An error occurred in the <App> component. Consider adding an error boundary to your tree to customize error handling behavior.
+[pid=20148][err] Visit https://react.dev/link/error-boundaries to learn more about error boundaries.", source: http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=9c2665eb (5258)
 ```

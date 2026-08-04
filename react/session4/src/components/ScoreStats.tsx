@@ -84,3 +84,16 @@ export function ScoreStatsContainer() {
 }
 
 export default ScoreStatsContainer
+
+// ScoreStats.tsx
+// Job:
+// This component displays score-related statistics for the interns.
+
+// Concerns mixed (if any):
+// ScoreStats.tsx
+// Job:
+// This component displays score-related statistics for the interns.
+
+// Concerns mixed (if any):
+// - UI rendering
+// - Business logic (score calculations)

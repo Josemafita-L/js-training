@@ -22,7 +22,7 @@ Timeout:  5000ms
 Call log:
   - Expect "toHaveCount" with timeout 5000ms
   - waiting for getByRole('button', { name: 'Remove' })
-    14 × locator resolved to 0 elements
+    13 × locator resolved to 0 elements
        - unexpected value "0"
 
 ```

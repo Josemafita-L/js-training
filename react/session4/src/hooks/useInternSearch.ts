@@ -78,3 +78,10 @@ function useInternSearch(
 }
 
 export default useInternSearch
+
+// Job:
+// This hook manages searching interns.
+
+// Concerns mixed:
+// - Search input state
+// - Filtering interns

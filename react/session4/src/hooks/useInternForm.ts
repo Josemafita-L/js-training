@@ -13,7 +13,7 @@
 // Verdict:
 // MODERATELY TESTABLE
 import { ChangeEvent, useState } from "react"
-import { validateInternForm } from "../utils/intern-validation"
+import { validateInternForm } from "../services/intern-service"
 interface InternFormState {
   name: string
   score: number
@@ -22,13 +22,14 @@ interface InternFormState {
 }
 
 interface UseInternFormReturn {
-  form: InternFormState
-  error: string
+  form: InternFormState;
+  error: string;
   handleChange: (
     e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
-  ) => void
-  handleReset: () => void
-  isValid: () => boolean
+  ) => void;
+  handleReset: () => void;
+  handleSubmit: () => boolean;
+  isValid: () => boolean;
 }
 
 const initialForm: InternFormState = {
@@ -38,7 +39,9 @@ const initialForm: InternFormState = {
   role: "Frontend",
 }
 
-function useInternForm(): UseInternFormReturn {
+function useInternForm(
+  addIntern: (intern: InternFormState) => void
+) {
   const [form, setForm] = useState<InternFormState>(initialForm)
   const [error, setError] = useState<string>("")
 
@@ -62,20 +65,27 @@ function useInternForm(): UseInternFormReturn {
     setForm(initialForm)
     setError("")
   }
-
-  function isValid(): boolean {
-  const validationError = validateInternForm(
-    form.name,
-    form.score
-  )
-
-  if (validationError) {
-    setError(validationError)
-    return false
+  function handleSubmit(): boolean {
+  if (!isValid()) {
+    return false;
   }
 
-  setError("")
-  return true
+  addIntern(form);
+  handleReset();
+
+  return true;
+}
+
+  function isValid(): boolean {
+  const validationError = validateInternForm(form);
+
+  if (validationError) {
+    setError(validationError);
+    return false;
+  }
+
+  setError("");
+  return true;
 }
 
   return {
@@ -83,6 +93,7 @@ function useInternForm(): UseInternFormReturn {
     error,
     handleChange,
     handleReset,
+    handleSubmit,
     isValid,
   }
 }
@@ -97,3 +108,11 @@ provides better IntelliSense and autocomplete,
 makes the hook easier to understand and maintain,
 and ensures components use the returned values correctly.
 */
+// Job:
+// This hook manages the Add Intern form.
+
+// Concerns mixed:
+// - Form state
+// - Validation
+// - Calling addIntern
+// - Resetting the form
