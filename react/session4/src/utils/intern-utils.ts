@@ -1,3 +1,4 @@
+import { assert } from "./assert";
 interface Intern {
   id: number
   name: string
@@ -8,15 +9,25 @@ interface Intern {
 
 export function filterInterns(
   interns: Intern[],
-  searchTerm: string
+  query: string
 ): Intern[] {
-  return interns.filter(
-    (intern) =>
-      intern.name
-        .toLowerCase()
-        .includes(searchTerm.toLowerCase()) ||
-      intern.role
-        .toLowerCase()
-        .includes(searchTerm.toLowerCase())
-  )
+
+  if (!query.trim()) {
+    return interns;
+  }
+
+  const search = query.toLowerCase();
+
+  const result = interns.filter(
+    intern =>
+      intern.name.toLowerCase().includes(search) ||
+      intern.role.toLowerCase().includes(search)
+  );
+
+  assert(
+    Array.isArray(result),
+    "filterInterns: expected filter() to return an array"
+  );
+
+  return result;
 }

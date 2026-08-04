@@ -53,15 +53,20 @@ it("removes an intern by id", () => {
 
   expect(result.current.interns).toEqual([]);
 });
-it("does nothing when removing a non-existent id", () => {
+it("throws when removing a non-existent id", () => {
   const { result } = renderHook(() => useInternRepository());
 
   act(() => {
     result.current.add(RAHUL);
-    result.current.remove(999);
   });
 
-  expect(result.current.interns).toEqual([RAHUL]);
+  expect(() => {
+    act(() => {
+      result.current.remove(999);
+    });
+  }).toThrow(
+    "removeIntern: no intern found with id=999"
+  );
 });
 it("updates an existing intern", () => {
   const { result } = renderHook(() => useInternRepository());
@@ -93,3 +98,16 @@ it("updates only the matching intern", () => {
   expect(result.current.interns[0].score).toBe(100);
   expect(result.current.interns[1]).toEqual(PRIYA);
 });
+// Task 2.1 Reflection:
+//
+// Number of null checks removed:
+// 0
+//
+// Reason:
+// The original remove() function did not return null or undefined.
+// It silently ignored invalid IDs instead.
+//
+// Impact:
+// No callers had null checks to remove, which shows that the failure
+// was not being handled at all. The missing validation allowed invalid
+// operations to continue silently.

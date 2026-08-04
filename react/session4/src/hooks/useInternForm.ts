@@ -1,3 +1,14 @@
+// Silent Failure Audit — useInternForm.ts
+
+// Pattern 1: None found (no null/undefined error returns)
+// Pattern 2: None found (no silent default values using || or ??)
+// Pattern 3: None found (no swallowed exceptions)
+// Pattern 4: None found (no empty collections returned on failure)
+// Pattern 5: handleSubmit() returns false when validation fails.
+// This is acceptable for expected form validation but requires callers to check the returned boolean.
+
+
+
 // Testability Audit — useInternForm.ts
 //
 // Q1. Predictable output?
@@ -116,3 +127,16 @@ and ensures components use the returned values correctly.
 // - Validation
 // - Calling addIntern
 // - Resetting the form
+
+
+// Audit Summary
+//
+// Highest-risk pattern:
+// handleSubmit() returns false instead of throwing.
+//
+// Why?
+// If a caller ignores the boolean result,
+// they may assume the submission succeeded.
+// In this hook it is acceptable because
+// validation failures are expected user input errors,
+// not unexpected application failures.
