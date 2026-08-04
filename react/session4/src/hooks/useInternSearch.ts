@@ -1,5 +1,18 @@
+// Testability Audit — useInternSearch.ts
+//
+// Q1. Predictable output?
+// YES — Given the same interns and search text, it always returns the same filtered list.
+//
+// Q2. Can it run without external dependencies?
+// YES — It does not require a server, database, browser API, or timer.
+//
+// Q3. Can dependencies be replaced?
+// YES — Interns are passed as a parameter, making the filtering logic reusable.
+//
+// Verdict:
+// HIGHLY TESTABLE
 import { useMemo, useState } from "react"
-
+import { filterInterns } from "../utils/intern-utils"
 interface Intern {
   id: number
   name: string
@@ -34,15 +47,8 @@ function useInternSearch(
   */
 
   const filtered = useMemo(() => {
-    console.log("Filtering interns...")
-
-    return interns.filter((intern) =>
-      intern.name
-        .toLowerCase()
-        .includes(search.toLowerCase())
-    )
-  }, [interns, search])
-
+  return filterInterns(interns, search)
+}, [interns, search])
   const stats = useMemo(() => {
     return {
       total: interns.length,
@@ -72,3 +78,10 @@ function useInternSearch(
 }
 
 export default useInternSearch
+
+// Job:
+// This hook manages searching interns.
+
+// Concerns mixed:
+// - Search input state
+// - Filtering interns

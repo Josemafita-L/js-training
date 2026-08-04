@@ -1,0 +1,540 @@
+{
+	"knownSymbols": {
+		"Task": [
+			{
+				"name": "Task",
+				"path": "c:\\Users\\Josemafita\\Desktop\\js-training\\task-tracker\\tasks.ts",
+				"type": "interface",
+				"isDefault": false
+			}
+		],
+		"TaskManager": [
+			{
+				"name": "TaskManager",
+				"path": "c:\\Users\\Josemafita\\Desktop\\js-training\\task-tracker\\tasks.ts",
+				"type": "class",
+				"isDefault": false
+			}
+		],
+		"groupBy": [
+			{
+				"name": "groupBy",
+				"path": "c:\\Users\\Josemafita\\Desktop\\js-training\\task-tracker\\tasks.ts",
+				"type": "function",
+				"isDefault": false
+			}
+		],
+		"defineConfig": [
+			{
+				"name": "defineConfig",
+				"module": "vite",
+				"isDefault": false
+			},
+			{
+				"name": "defineConfig",
+				"path": "c:\\Users\\Josemafita\\Desktop\\js-training\\react\\session2\\vite.config.ts",
+				"isDefault": true
+			},
+			{
+				"name": "defineConfig",
+				"module": "vitest/config",
+				"isDefault": false
+			}
+		],
+		"react": [
+			{
+				"name": "react",
+				"module": "@vitejs/plugin-react",
+				"isDefault": true
+			}
+		],
+		"TsxRules": [
+			{
+				"name": "TsxRules",
+				"path": "c:\\Users\\Josemafita\\Desktop\\js-training\\react\\session1\\src\\TsxRules.tsx",
+				"isDefault": true
+			}
+		],
+		"StyledCard": [
+			{
+				"name": "StyledCard",
+				"path": "c:\\Users\\Josemafita\\Desktop\\js-training\\react\\session1\\src\\StyledCard.tsx",
+				"isDefault": true
+			}
+		],
+		"StatusBadge": [
+			{
+				"name": "StatusBadge",
+				"path": "c:\\Users\\Josemafita\\Desktop\\js-training\\react\\session1\\src\\StatusBadge.tsx",
+				"isDefault": true
+			}
+		],
+		"SkillList": [
+			{
+				"name": "SkillList",
+				"path": "c:\\Users\\Josemafita\\Desktop\\js-training\\react\\session1\\src\\SkillList.tsx",
+				"isDefault": true
+			}
+		],
+		"SelfLearning": [
+			{
+				"name": "SelfLearning",
+				"path": "c:\\Users\\Josemafita\\Desktop\\js-training\\react\\session2\\src\\SelfLearning.tsx",
+				"isDefault": true
+			}
+		],
+		"ScoreCard": [
+			{
+				"name": "ScoreCard",
+				"path": "c:\\Users\\Josemafita\\Desktop\\js-training\\react\\session1\\src\\ScoreCard.tsx",
+				"isDefault": true
+			}
+		],
+		"Profile": [
+			{
+				"name": "Profile",
+				"path": "c:\\Users\\Josemafita\\Desktop\\js-training\\react\\session1\\src\\Profile.tsx",
+				"isDefault": true
+			}
+		],
+		"StrictMode": [
+			{
+				"name": "StrictMode",
+				"module": "react",
+				"isDefault": false
+			}
+		],
+		"createRoot": [
+			{
+				"name": "createRoot",
+				"module": "react-dom/client",
+				"isDefault": false
+			}
+		],
+		"InternCard": [
+			{
+				"name": "InternCard",
+				"path": "c:\\Users\\Josemafita\\Desktop\\js-training\\react\\session2\\src\\InternCard.tsx",
+				"isDefault": true
+			}
+		],
+		"Greeting": [
+			{
+				"name": "Greeting",
+				"path": "c:\\Users\\Josemafita\\Desktop\\js-training\\react\\session1\\src\\Greeting.tsx",
+				"isDefault": true
+			}
+		],
+		"Dashboard": [
+			{
+				"name": "Dashboard",
+				"path": "c:\\Users\\Josemafita\\Desktop\\js-training\\react\\session2\\src\\Dashboard.tsx",
+				"isDefault": true
+			}
+		],
+		"App": [
+			{
+				"name": "App",
+				"path": "c:\\Users\\Josemafita\\Desktop\\js-training\\react\\session2\\src\\App.tsx",
+				"isDefault": true
+			}
+		],
+		"InternList": [
+			{
+				"name": "InternList",
+				"path": "c:\\Users\\Josemafita\\Desktop\\js-training\\react\\react\\session3\\src\\InternList.tsx",
+				"isDefault": true
+			}
+		],
+		"useState": [
+			{
+				"name": "useState",
+				"module": "react",
+				"isDefault": false
+			}
+		],
+		"InternForm": [
+			{
+				"name": "InternForm",
+				"path": "c:\\Users\\Josemafita\\Desktop\\js-training\\react\\react\\session3\\src\\InternForm.tsx",
+				"isDefault": true
+			}
+		],
+		"FocusInput": [
+			{
+				"name": "FocusInput",
+				"path": "c:\\Users\\Josemafita\\Desktop\\js-training\\react\\react\\session3\\src\\FocusInput.tsx",
+				"isDefault": true
+			}
+		],
+		"useRef": [
+			{
+				"name": "useRef",
+				"module": "react",
+				"isDefault": false
+			}
+		],
+		"FilteredInterns": [
+			{
+				"name": "FilteredInterns",
+				"path": "c:\\Users\\Josemafita\\Desktop\\js-training\\react\\react\\session3\\src\\FilteredInterns.tsx",
+				"isDefault": true
+			}
+		],
+		"useEffect": [
+			{
+				"name": "useEffect",
+				"module": "react",
+				"isDefault": false
+			}
+		],
+		"EscapeHandler": [
+			{
+				"name": "EscapeHandler",
+				"path": "c:\\Users\\Josemafita\\Desktop\\js-training\\react\\react\\session3\\src\\EscapeHandler.tsx",
+				"isDefault": true
+			}
+		],
+		"Counter": [
+			{
+				"name": "Counter",
+				"path": "c:\\Users\\Josemafita\\Desktop\\js-training\\react\\react\\session3\\src\\Counter.tsx",
+				"isDefault": true
+			}
+		],
+		"TogglePanel": [
+			{
+				"name": "TogglePanel",
+				"path": "c:\\Users\\Josemafita\\Desktop\\js-training\\react\\react\\session3\\src\\TogglePanel.tsx",
+				"isDefault": true
+			}
+		],
+		"StopwatchRef": [
+			{
+				"name": "StopwatchRef",
+				"path": "c:\\Users\\Josemafita\\Desktop\\js-training\\react\\react\\session3\\src\\StopwatchRef.tsx",
+				"isDefault": true
+			}
+		],
+		"StateTypes": [
+			{
+				"name": "StateTypes",
+				"path": "c:\\Users\\Josemafita\\Desktop\\js-training\\react\\react\\session3\\src\\StateTypes.tsx",
+				"isDefault": true
+			}
+		],
+		"RefVsState": [
+			{
+				"name": "RefVsState",
+				"path": "c:\\Users\\Josemafita\\Desktop\\js-training\\react\\react\\session3\\src\\RefVsState.tsx",
+				"isDefault": true
+			}
+		],
+		"InternObjectForm": [
+			{
+				"name": "InternObjectForm",
+				"path": "c:\\Users\\Josemafita\\Desktop\\js-training\\react\\react\\session3\\src\\InternObjectForm.tsx",
+				"isDefault": true
+			}
+		],
+		"InternLoader": [
+			{
+				"name": "InternLoader",
+				"path": "c:\\Users\\Josemafita\\Desktop\\js-training\\react\\react\\session3\\src\\InternLoader.tsx",
+				"isDefault": true
+			}
+		],
+		"InternFormState": [
+			{
+				"name": "InternFormState",
+				"path": "c:\\Users\\Josemafita\\Desktop\\js-training\\react\\session4\\src\\utils\\request-utils.ts",
+				"type": "interface",
+				"isDefault": false
+			}
+		],
+		"prepareInternPayload": [
+			{
+				"name": "prepareInternPayload",
+				"path": "c:\\Users\\Josemafita\\Desktop\\js-training\\react\\session4\\src\\utils\\request-utils.ts",
+				"type": "function",
+				"isDefault": false
+			}
+		],
+		"validateInternForm": [
+			{
+				"name": "validateInternForm",
+				"path": "c:\\Users\\Josemafita\\Desktop\\js-training\\react\\session4\\src\\utils\\intern-validation.ts",
+				"type": "function",
+				"isDefault": false
+			}
+		],
+		"filterInterns": [
+			{
+				"name": "filterInterns",
+				"path": "c:\\Users\\Josemafita\\Desktop\\js-training\\react\\session4\\src\\utils\\intern-utils.ts",
+				"type": "function",
+				"isDefault": false
+			}
+		],
+		"generateInternId": [
+			{
+				"name": "generateInternId",
+				"path": "c:\\Users\\Josemafita\\Desktop\\js-training\\react\\session4\\src\\utils\\generate-id.ts",
+				"type": "function",
+				"isDefault": false
+			}
+		],
+		"ThemeProvider": [
+			{
+				"name": "ThemeProvider",
+				"path": "c:\\Users\\Josemafita\\Desktop\\js-training\\react\\session4\\src\\contexts\\theme-context.tsx",
+				"type": "function",
+				"isDefault": false
+			}
+		],
+		"useTheme": [
+			{
+				"name": "useTheme",
+				"path": "c:\\Users\\Josemafita\\Desktop\\js-training\\react\\session4\\src\\contexts\\theme-context.tsx",
+				"type": "function",
+				"isDefault": false
+			}
+		],
+		"InternProvider": [
+			{
+				"name": "InternProvider",
+				"path": "c:\\Users\\Josemafita\\Desktop\\js-training\\react\\session4\\src\\contexts\\intern-context.tsx",
+				"type": "function",
+				"isDefault": false
+			}
+		],
+		"useInterns": [
+			{
+				"name": "useInterns",
+				"path": "c:\\Users\\Josemafita\\Desktop\\js-training\\react\\session4\\src\\contexts\\intern-context.tsx",
+				"type": "function",
+				"isDefault": false
+			}
+		],
+		"useReducer": [
+			{
+				"name": "useReducer",
+				"module": "react",
+				"isDefault": false
+			}
+		],
+		"describe": [
+			{
+				"name": "describe",
+				"module": "vitest",
+				"isDefault": false
+			}
+		],
+		"expect": [
+			{
+				"name": "expect",
+				"module": "vitest",
+				"isDefault": false
+			}
+		],
+		"test": [
+			{
+				"name": "test",
+				"module": "vitest",
+				"isDefault": false
+			}
+		],
+		"render": [
+			{
+				"name": "render",
+				"module": "@testing-library/react",
+				"isDefault": false
+			}
+		],
+		"screen": [
+			{
+				"name": "screen",
+				"module": "@testing-library/react",
+				"isDefault": false
+			}
+		],
+		"AddInternForm": [
+			{
+				"name": "AddInternForm",
+				"path": "c:\\Users\\Josemafita\\Desktop\\js-training\\react\\session4\\src\\components\\AddInternForm.tsx",
+				"isDefault": true
+			}
+		],
+		"CounterDemo": [
+			{
+				"name": "CounterDemo",
+				"path": "c:\\Users\\Josemafita\\Desktop\\js-training\\react\\session4\\src\\components\\CounterDemo.tsx",
+				"isDefault": true
+			}
+		],
+		"InternListWithCallback": [
+			{
+				"name": "InternListWithCallback",
+				"path": "c:\\Users\\Josemafita\\Desktop\\js-training\\react\\session4\\src\\components\\InternListWithCallback.tsx",
+				"isDefault": true
+			}
+		],
+		"memo": [
+			{
+				"name": "memo",
+				"module": "react",
+				"isDefault": false
+			}
+		],
+		"useCallback": [
+			{
+				"name": "useCallback",
+				"module": "react",
+				"isDefault": false
+			}
+		],
+		"InternSearch": [
+			{
+				"name": "InternSearch",
+				"path": "c:\\Users\\Josemafita\\Desktop\\js-training\\react\\session4\\src\\components\\InternSearch.tsx",
+				"isDefault": true
+			}
+		],
+		"PropDrillingDemo": [
+			{
+				"name": "PropDrillingDemo",
+				"path": "c:\\Users\\Josemafita\\Desktop\\js-training\\react\\session4\\src\\components\\PropDrillingDemo.tsx",
+				"isDefault": true
+			}
+		],
+		"Navbar": [
+			{
+				"name": "Navbar",
+				"path": "c:\\Users\\Josemafita\\Desktop\\js-training\\react\\session4\\src\\components\\Navbar.tsx",
+				"isDefault": true
+			}
+		],
+		"ScoreStats": [
+			{
+				"name": "ScoreStats",
+				"path": "c:\\Users\\Josemafita\\Desktop\\js-training\\react\\session4\\src\\components\\ScoreStats.tsx",
+				"type": "function",
+				"isDefault": false
+			}
+		],
+		"ScoreStatsContainer": [
+			{
+				"name": "ScoreStatsContainer",
+				"path": "c:\\Users\\Josemafita\\Desktop\\js-training\\react\\session4\\src\\components\\ScoreStats.tsx",
+				"type": "function",
+				"isDefault": true
+			}
+		],
+		"useMemo": [
+			{
+				"name": "useMemo",
+				"module": "react",
+				"isDefault": false
+			}
+		],
+		"ThemedCard": [
+			{
+				"name": "ThemedCard",
+				"path": "c:\\Users\\Josemafita\\Desktop\\js-training\\react\\session4\\src\\components\\ThemedCard.tsx",
+				"isDefault": true
+			}
+		],
+		"useInternForm": [
+			{
+				"name": "useInternForm",
+				"path": "c:\\Users\\Josemafita\\Desktop\\js-training\\react\\session4\\src\\hooks\\useInternForm.ts",
+				"isDefault": true
+			}
+		],
+		"ChangeEvent": [
+			{
+				"name": "ChangeEvent",
+				"module": "react",
+				"isDefault": false
+			}
+		],
+		"useCounter": [
+			{
+				"name": "useCounter",
+				"path": "c:\\Users\\Josemafita\\Desktop\\js-training\\react\\session4\\src\\hooks\\useCounter.ts",
+				"isDefault": true
+			}
+		],
+		"useInternSearch": [
+			{
+				"name": "useInternSearch",
+				"path": "c:\\Users\\Josemafita\\Desktop\\js-training\\react\\session4\\src\\hooks\\useInternSearch.ts",
+				"isDefault": true
+			}
+		],
+		"ReactNode": [
+			{
+				"name": "ReactNode",
+				"module": "react",
+				"isDefault": false
+			}
+		],
+		"ReactElement": [
+			{
+				"name": "ReactElement",
+				"module": "react",
+				"isDefault": false
+			}
+		],
+		"ScoreBar": [
+			{
+				"name": "ScoreBar",
+				"path": "c:\\Users\\Josemafita\\Desktop\\js-training\\react\\session2\\src\\ScoreBar.tsx",
+				"isDefault": true
+			}
+		],
+		"ProfileCard": [
+			{
+				"name": "ProfileCard",
+				"path": "c:\\Users\\Josemafita\\Desktop\\js-training\\react\\session2\\src\\ProfileCard.tsx",
+				"isDefault": true
+			}
+		],
+		"Intern": [
+			{
+				"name": "Intern",
+				"path": "c:\\Users\\Josemafita\\Desktop\\js-training\\react\\session2\\src\\InternProfile.tsx",
+				"type": "interface",
+				"isDefault": false
+			}
+		],
+		"InternProfile": [
+			{
+				"name": "InternProfile",
+				"path": "c:\\Users\\Josemafita\\Desktop\\js-training\\react\\session2\\src\\InternProfile.tsx",
+				"isDefault": true
+			}
+		],
+		"Card": [
+			{
+				"name": "Card",
+				"path": "c:\\Users\\Josemafita\\Desktop\\js-training\\react\\session2\\src\\Card.tsx",
+				"isDefault": true
+			}
+		],
+		"Badge": [
+			{
+				"name": "Badge",
+				"path": "c:\\Users\\Josemafita\\Desktop\\js-training\\react\\session2\\src\\Badge.tsx",
+				"isDefault": true
+			}
+		],
+		"Avatar": [
+			{
+				"name": "Avatar",
+				"path": "c:\\Users\\Josemafita\\Desktop\\js-training\\react\\session2\\src\\Avatar.tsx",
+				"isDefault": true
+			}
+		]
+	}
+}

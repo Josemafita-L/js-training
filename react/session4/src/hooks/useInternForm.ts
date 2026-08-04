@@ -1,5 +1,19 @@
+// Testability Audit — useInternForm.ts
+//
+// Q1. Predictable output?
+// PARTIALLY — Validation is predictable, but the hook manages React state,
+// so the output depends on the current state.
+//
+// Q2. Can it run without external dependencies?
+// YES — It does not use a server, database, timer, or API.
+//
+// Q3. Can dependencies be replaced?
+// NO — The validation logic is tightly coupled to the hook's internal state.
+//
+// Verdict:
+// MODERATELY TESTABLE
 import { ChangeEvent, useState } from "react"
-
+import { validateInternForm } from "../services/intern-service"
 interface InternFormState {
   name: string
   score: number
@@ -8,13 +22,14 @@ interface InternFormState {
 }
 
 interface UseInternFormReturn {
-  form: InternFormState
-  error: string
+  form: InternFormState;
+  error: string;
   handleChange: (
     e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
-  ) => void
-  handleReset: () => void
-  isValid: () => boolean
+  ) => void;
+  handleReset: () => void;
+  handleSubmit: () => boolean;
+  isValid: () => boolean;
 }
 
 const initialForm: InternFormState = {
@@ -24,7 +39,9 @@ const initialForm: InternFormState = {
   role: "Frontend",
 }
 
-function useInternForm(): UseInternFormReturn {
+function useInternForm(
+  addIntern: (intern: InternFormState) => void
+) {
   const [form, setForm] = useState<InternFormState>(initialForm)
   const [error, setError] = useState<string>("")
 
@@ -48,27 +65,35 @@ function useInternForm(): UseInternFormReturn {
     setForm(initialForm)
     setError("")
   }
+  function handleSubmit(): boolean {
+  if (!isValid()) {
+    return false;
+  }
+
+  addIntern(form);
+  handleReset();
+
+  return true;
+}
 
   function isValid(): boolean {
-    if (!form.name.trim()) {
-      setError("Name is required")
-      return false
-    }
+  const validationError = validateInternForm(form);
 
-    if (form.score < 0 || form.score > 100) {
-      setError("Score must be between 0 and 100")
-      return false
-    }
-
-    setError("")
-    return true
+  if (validationError) {
+    setError(validationError);
+    return false;
   }
+
+  setError("");
+  return true;
+}
 
   return {
     form,
     error,
     handleChange,
     handleReset,
+    handleSubmit,
     isValid,
   }
 }
@@ -83,3 +108,11 @@ provides better IntelliSense and autocomplete,
 makes the hook easier to understand and maintain,
 and ensures components use the returned values correctly.
 */
+// Job:
+// This hook manages the Add Intern form.
+
+// Concerns mixed:
+// - Form state
+// - Validation
+// - Calling addIntern
+// - Resetting the form
