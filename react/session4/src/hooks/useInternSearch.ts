@@ -1,3 +1,10 @@
+// Code Smell Audit — useInternSearch.ts
+//
+// Smell 1: Mixed Responsibilities — The hook manages search state while also calculating dashboard statistics.
+// Smell 2: Complex Calculation — The average score calculation inside useMemo() reduces readability and could be extracted into a utility function.
+// Smell 3: Anonymous Callback Functions — Inline filter() and reduce() callbacks make the statistics calculation harder to scan and reuse.
+
+
 // Silent Failure Audit — useInternSearch.ts
 //
 // Pattern 1: None found (no null/undefined error returns)
@@ -22,6 +29,7 @@
 // HIGHLY TESTABLE
 import { useMemo, useState } from "react"
 import { filterInterns } from "../utils/intern-utils"
+import { calculateInternStats } from "../utils/intern-stats";
 interface Intern {
   id: number
   name: string
@@ -59,24 +67,8 @@ function useInternSearch(
   return filterInterns(interns, search)
 }, [interns, search])
   const stats = useMemo(() => {
-    return {
-      total: interns.length,
-
-      present: interns.filter(
-        (i) => i.isPresent
-      ).length,
-
-      avg:
-        interns.length > 0
-          ? Math.round(
-              interns.reduce(
-                (sum, intern) => sum + intern.score,
-                0
-              ) / interns.length
-            )
-          : 0,
-    }
-  }, [interns])
+  return calculateInternStats(interns);
+}, [interns]);
 
   return {
     search,
@@ -107,3 +99,22 @@ export default useInternSearch
 // filterInterns() will fail.
 // A precondition assertion could make this fail earlier
 // with a clearer error message.
+
+
+// Refactoring Priority:
+// I would first extract the statistics calculation into a separate utility function because it simplifies the hook, improves readability, and allows the calculation to be tested independently.
+
+// Rename Refactoring
+//
+// Old name: i
+// New name: intern
+//
+// The new name clearly indicates that each item represents an Intern object, making the filtering logic easier to understand without tracing the code.
+
+
+/*
+Task 3.3 Comment
+
+Before refactoring, the original code performed two responsibilities: managing the search state and calculating dashboard statistics.
+After extraction, useInternSearch() manages the search state, while calculateInternStats() is responsible only for calculating the statistics. This improves readability, reusability, and makes the statistics calculation easier to test independently.
+*/

@@ -1,3 +1,10 @@
+// Code Smell Audit
+// Smell 1: Mixed Responsibilities — This hook manages form state, validation, submission, and form reset instead of focusing on one responsibility.
+// Smell 2: Conditional Complexity — handleChange() contains nested ternary operators, making the logic harder to read.
+// Smell 3: Hardcoded Values — The initial role "Frontend" and score 0 are hardcoded instead of using named constants.
+
+
+
 // Silent Failure Audit — useInternForm.ts
 
 // Pattern 1: None found (no null/undefined error returns)
@@ -140,3 +147,8 @@ and ensures components use the returned values correctly.
 // In this hook it is acceptable because
 // validation failures are expected user input errors,
 // not unexpected application failures.
+
+
+
+// Refactoring Priority:
+// I would first simplify handleChange() because the nested ternary operator is the hardest part of the hook to read. Extracting the value conversion into a helper function would improve readability without changing behavior.

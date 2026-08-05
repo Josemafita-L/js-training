@@ -1,3 +1,9 @@
+// Code Smell Audit — intern-context.tsx
+//
+// Smell 1: Mixed Responsibilities — This file manages React Context, data loading, response validation, repository updates, and ID generation.
+// Smell 2: Long Function — validateInternResponse() performs multiple validation checks and error handling in one function.
+// Smell 3: Hardcoded Data — Sample intern data is defined directly inside the provider instead of being extracted into a separate file or service.
+
 // Silent Failure Audit — intern-context.tsx
 //
 // Pattern 1: None found (context access fails fast with an error)
@@ -185,3 +191,9 @@ export function useInterns() {
 // If malformed data reaches the repository,
 // the application may fail much later,
 // making the source of the bug difficult to identify.
+
+
+// Refactoring Priority:
+//
+// I would first separate the validation logic from the Context Provider.
+// This reduces the provider's responsibilities, improves readability,and allows the validation to be tested independently.
