@@ -3,7 +3,7 @@ import { createRoot } from "react-dom/client"
 
 import "./index.css"
 import App from "./App"
-
+import "./config"
 import { ThemeProvider } from "./contexts/theme-context"
 import { InternProvider } from "./contexts/intern-context"
 
