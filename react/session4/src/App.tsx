@@ -1,5 +1,5 @@
 import Navbar from "./components/Navbar"
-import ScoreStats from "./components/ScoreStats"
+import ScoreStatsContainer from "./components/ScoreStats";
 import AddInternForm from "./components/AddInternForm"
 import InternSearch from "./components/InternSearch"
 import InternListWithCallback from "./components/InternListWithCallback"

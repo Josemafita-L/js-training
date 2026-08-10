@@ -6,7 +6,7 @@
 
 import { assert } from "./assert";
 const MIN_SCORE = 0;
-const MAX_SCORE = 100;
+const MAX_SCORE = 10;
 
 export function validateInternForm(
   name: string,

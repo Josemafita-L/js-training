@@ -92,7 +92,7 @@ export function InternProvider({
   generateId = Date.now,
 }: InternProviderProps) {
  const repo = useInternRepository();
-  const [isLoading, setIsLoading] =
+  const [isLoading, setIsLoading] = useState(true);
     useEffect(() => {
   setTimeout(() => {
     const data = [
@@ -127,10 +127,12 @@ export function InternProvider({
     ];
 
     const interns = validateInternResponse(data);
-
     interns.forEach(repo.add);
 
     setIsLoading(false);
+
+
+   
   }, 800);
 }, []);
 function addIntern(intern: Omit<Intern, "id">): void {
