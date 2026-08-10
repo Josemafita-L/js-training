@@ -1,5 +1,37 @@
-import { ChangeEvent, useState } from "react"
+// Code Smell Audit
+// Smell 1: Mixed Responsibilities — This hook manages form state, validation, submission, and form reset instead of focusing on one responsibility.
+// Smell 2: Conditional Complexity — handleChange() contains nested ternary operators, making the logic harder to read.
+// Smell 3: Hardcoded Values — The initial role "Frontend" and score 0 are hardcoded instead of using named constants.
 
+
+
+// Silent Failure Audit — useInternForm.ts
+
+// Pattern 1: None found (no null/undefined error returns)
+// Pattern 2: None found (no silent default values using || or ??)
+// Pattern 3: None found (no swallowed exceptions)
+// Pattern 4: None found (no empty collections returned on failure)
+// Pattern 5: handleSubmit() returns false when validation fails.
+// This is acceptable for expected form validation but requires callers to check the returned boolean.
+
+
+
+// Testability Audit — useInternForm.ts
+//
+// Q1. Predictable output?
+// PARTIALLY — Validation is predictable, but the hook manages React state,
+// so the output depends on the current state.
+//
+// Q2. Can it run without external dependencies?
+// YES — It does not use a server, database, timer, or API.
+//
+// Q3. Can dependencies be replaced?
+// NO — The validation logic is tightly coupled to the hook's internal state.
+//
+// Verdict:
+// MODERATELY TESTABLE
+import { ChangeEvent, useState } from "react"
+import { validateInternForm } from "../services/intern-service"
 interface InternFormState {
   name: string
   score: number
@@ -8,13 +40,14 @@ interface InternFormState {
 }
 
 interface UseInternFormReturn {
-  form: InternFormState
-  error: string
+  form: InternFormState;
+  error: string;
   handleChange: (
     e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
-  ) => void
-  handleReset: () => void
-  isValid: () => boolean
+  ) => void;
+  handleReset: () => void;
+  handleSubmit: () => boolean;
+  isValid: () => boolean;
 }
 
 const initialForm: InternFormState = {
@@ -24,7 +57,9 @@ const initialForm: InternFormState = {
   role: "Frontend",
 }
 
-function useInternForm(): UseInternFormReturn {
+function useInternForm(
+  addIntern: (intern: InternFormState) => void
+) {
   const [form, setForm] = useState<InternFormState>(initialForm)
   const [error, setError] = useState<string>("")
 
@@ -48,27 +83,35 @@ function useInternForm(): UseInternFormReturn {
     setForm(initialForm)
     setError("")
   }
+  function handleSubmit(): boolean {
+  if (!isValid()) {
+    return false;
+  }
+
+  addIntern(form);
+  handleReset();
+
+  return true;
+}
 
   function isValid(): boolean {
-    if (!form.name.trim()) {
-      setError("Name is required")
-      return false
-    }
+  const validationError = validateInternForm(form);
 
-    if (form.score < 0 || form.score > 100) {
-      setError("Score must be between 0 and 100")
-      return false
-    }
-
-    setError("")
-    return true
+  if (validationError) {
+    setError(validationError);
+    return false;
   }
+
+  setError("");
+  return true;
+}
 
   return {
     form,
     error,
     handleChange,
     handleReset,
+    handleSubmit,
     isValid,
   }
 }
@@ -83,3 +126,29 @@ provides better IntelliSense and autocomplete,
 makes the hook easier to understand and maintain,
 and ensures components use the returned values correctly.
 */
+// Job:
+// This hook manages the Add Intern form.
+
+// Concerns mixed:
+// - Form state
+// - Validation
+// - Calling addIntern
+// - Resetting the form
+
+
+// Audit Summary
+//
+// Highest-risk pattern:
+// handleSubmit() returns false instead of throwing.
+//
+// Why?
+// If a caller ignores the boolean result,
+// they may assume the submission succeeded.
+// In this hook it is acceptable because
+// validation failures are expected user input errors,
+// not unexpected application failures.
+
+
+
+// Refactoring Priority:
+// I would first simplify handleChange() because the nested ternary operator is the hardest part of the hook to read. Extracting the value conversion into a helper function would improve readability without changing behavior.

@@ -2,21 +2,17 @@ import useInternForm from "../hooks/useInternForm"
 import { useInterns } from "../contexts/intern-context"
 
 function AddInternForm() {
-  const { form, error, handleChange, handleReset, isValid } =
-    useInternForm()
+  const { addIntern } = useInterns();
 
-  const { addIntern, interns } = useInterns()
+const {
+  form,
+  error,
+  handleChange,
+  handleReset,
+  handleSubmit,
+} = useInternForm(addIntern);
 
-  function handleSubmit(): void {
-    if (!isValid()) return
 
-    addIntern({
-      id: interns.length + 1,
-      ...form,
-    })
-
-    handleReset()
-  }
 
   return (
     <div
@@ -105,3 +101,10 @@ function AddInternForm() {
 }
 
 export default AddInternForm
+
+// Job:
+// This component displays the intern form.
+
+// Concerns mixed:
+// - UI rendering
+// - Event handling
